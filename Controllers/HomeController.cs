@@ -17,31 +17,31 @@ public class HomeController : Controller
     {
         return View();
     }
-
-
-    public IActionResult ProductList()
-    {
-        return View();
-    }
-
-    public IActionResult ProductDetail()
-    {
-        return View();
-    }
-
-    public IActionResult AboutUs()
-    {
-        return View();
-    }
-
-    public IActionResult Cart()
-    {
-        return View();
-    }
-    
-    
-    
-    
+    //
+    //
+    // public IActionResult ProductList()
+    // {
+    //     return View();
+    // }
+    //
+    // public IActionResult ProductDetail()
+    // {
+    //     return View();
+    // }
+    //
+    // public IActionResult AboutUs()
+    // {
+    //     return View();
+    // }
+    //
+    // public IActionResult Cart()
+    // {
+    //     return View();
+    // }
+    //
+    //
+    //
+    //
 
     public IActionResult Privacy()
     {
