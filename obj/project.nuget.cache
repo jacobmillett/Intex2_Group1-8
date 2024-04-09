@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Fi3MDY7ms/pjiUv/q5nCC9trcq2evC0LTjKTlI7DDqGq1+hWpynKfftsN2/758PyYj8cqsZdAAkf/DFODsxcSw==",
+  "dgSpecHash": "Cr5xXS4uk1bzjF+YvviOTZTQgxI9fHceWfvEf0LV72IsMonzwj406RDib5ZwYi5bfUoQivLAILzEkN8VzxEvWQ==",
   "success": true,
   "projectFilePath": "/Users/jacob/RiderProjects/AuroraBricks/AuroraBricks.csproj",
   "expectedPackageFiles": [
@@ -56,6 +56,7 @@
     "/Users/jacob/.nuget/packages/humanizer.core.zh-cn/2.14.1/humanizer.core.zh-cn.2.14.1.nupkg.sha512",
     "/Users/jacob/.nuget/packages/humanizer.core.zh-hans/2.14.1/humanizer.core.zh-hans.2.14.1.nupkg.sha512",
     "/Users/jacob/.nuget/packages/humanizer.core.zh-hant/2.14.1/humanizer.core.zh-hant.2.14.1.nupkg.sha512",
+    "/Users/jacob/.nuget/packages/microsoft.aspnetcore.authentication.google/8.0.4/microsoft.aspnetcore.authentication.google.8.0.4.nupkg.sha512",
     "/Users/jacob/.nuget/packages/microsoft.aspnetcore.cryptography.internal/8.0.3/microsoft.aspnetcore.cryptography.internal.8.0.3.nupkg.sha512",
     "/Users/jacob/.nuget/packages/microsoft.aspnetcore.cryptography.keyderivation/8.0.3/microsoft.aspnetcore.cryptography.keyderivation.8.0.3.nupkg.sha512",
     "/Users/jacob/.nuget/packages/microsoft.aspnetcore.diagnostics.entityframeworkcore/8.0.3/microsoft.aspnetcore.diagnostics.entityframeworkcore.8.0.3.nupkg.sha512",
