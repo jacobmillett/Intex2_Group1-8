@@ -136,3 +136,4 @@
 /Users/jacob/RiderProjects/AuroraBricks/obj/Debug/net8.0/AuroraBricks.pdb
 /Users/jacob/RiderProjects/AuroraBricks/obj/Debug/net8.0/AuroraBricks.genruntimeconfig.cache
 /Users/jacob/RiderProjects/AuroraBricks/obj/Debug/net8.0/ref/AuroraBricks.dll
+/Users/jacob/RiderProjects/AuroraBricks/obj/Debug/net8.0/AuroraBricks.sourcelink.json
