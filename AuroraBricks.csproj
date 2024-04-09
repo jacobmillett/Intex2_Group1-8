@@ -30,7 +30,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="wwwroot\lib\qrcode\" />
+		<Folder Include="wwwroot\lib\qrcode\" />
     </ItemGroup>
 
 </Project>

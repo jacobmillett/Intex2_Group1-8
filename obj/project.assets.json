@@ -8634,24 +8634,26 @@
     ]
   },
   "packageFolders": {
-    "/Users/jacob/.nuget/packages/": {}
+    "C:\\Users\\calebreese\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/jacob/RiderProjects/AuroraBricks/AuroraBricks.csproj",
+      "projectUniqueName": "C:\\Users\\calebreese\\Source\\Repos\\Intex2_Group1-8\\AuroraBricks.csproj",
       "projectName": "AuroraBricks",
-      "projectPath": "/Users/jacob/RiderProjects/AuroraBricks/AuroraBricks.csproj",
-      "packagesPath": "/Users/jacob/.nuget/packages/",
-      "outputPath": "/Users/jacob/RiderProjects/AuroraBricks/obj/",
+      "projectPath": "C:\\Users\\calebreese\\Source\\Repos\\Intex2_Group1-8\\AuroraBricks.csproj",
+      "packagesPath": "C:\\Users\\calebreese\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\calebreese\\Source\\Repos\\Intex2_Group1-8\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/jacob/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\calebreese\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -8730,7 +8732,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/Users/jacob/.dotnet/sdk/8.0.203/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
