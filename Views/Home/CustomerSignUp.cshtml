@@ -1,0 +1,59 @@
+
+
+@{
+    ViewData["Title"] = "Customer Sign Up";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Register</title>
+</head>
+<body>
+
+  
+
+<form   method="post">
+    <h2>Register Below</h2>
+    <hr />
+    <div class="text-danger" role="alert"></div>
+    <div class="form-floating mb-3">
+        <input class="form-control" />
+        <label>First Name</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input class="form-control" />
+        <label>Last Name</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input class="form-control" />
+        <label>Age</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input class="form-control" />
+        <label>Birth Date</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input class="form-control" />
+        <label>Gender</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input class="form-control" />
+        <label>Country of Origin</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input class="form-control" />
+        <label>Email</label>
+    </div>
+            
+</form>
+<div>
+    <a class="btn-darkblue centereddiv" asp-area="Identity" asp-page="/Account/Register">Register</a>
+</div>
+</body>
+</html>
+
+@section Scripts {
+
+}

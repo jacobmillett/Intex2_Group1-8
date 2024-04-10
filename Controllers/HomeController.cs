@@ -17,6 +17,11 @@ public class HomeController : Controller
     {
         return View();
     }
+
+    public IActionResult CustomerSignUp()
+    {
+        return View();
+    }
     //
     //
     // public IActionResult ProductList()
