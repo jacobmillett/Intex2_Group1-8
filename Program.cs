@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using AuroraBricks.Data;
 using AuroraBricks.Areas.Identity.Data;
+using AuroraBricks.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -20,8 +21,10 @@ builder.Services.AddDbContext<AuroraBricksIdentityDbContext>(options =>
 
 var generalConnectionString = builder.Configuration.GetConnectionString("ABrixConnection") ??
                               throw new InvalidOperationException("Connection string 'ABrixConnection' not found.");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.AddDbContext<AbrixContext>(options =>
     options.UseSqlite(generalConnectionString));
+
+builder.Services.AddScoped<IBrixRepository, EfBrixRepository>();
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
