@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\calebreese\\Source\\Repos\\Intex2_Group1-8\\AuroraBricks.csproj": {}
+    "C:\\Users\\mccoo\\Source\\Repos\\Intex2_Group1-8\\AuroraBricks.csproj": {}
   },
   "projects": {
-    "C:\\Users\\calebreese\\Source\\Repos\\Intex2_Group1-8\\AuroraBricks.csproj": {
+    "C:\\Users\\mccoo\\Source\\Repos\\Intex2_Group1-8\\AuroraBricks.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\calebreese\\Source\\Repos\\Intex2_Group1-8\\AuroraBricks.csproj",
+        "projectUniqueName": "C:\\Users\\mccoo\\Source\\Repos\\Intex2_Group1-8\\AuroraBricks.csproj",
         "projectName": "AuroraBricks",
-        "projectPath": "C:\\Users\\calebreese\\Source\\Repos\\Intex2_Group1-8\\AuroraBricks.csproj",
-        "packagesPath": "C:\\Users\\calebreese\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\calebreese\\Source\\Repos\\Intex2_Group1-8\\obj\\",
+        "projectPath": "C:\\Users\\mccoo\\Source\\Repos\\Intex2_Group1-8\\AuroraBricks.csproj",
+        "packagesPath": "C:\\Users\\mccoo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\mccoo\\Source\\Repos\\Intex2_Group1-8\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\calebreese\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\mccoo\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -34,6 +34,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -100,7 +105,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

@@ -18,5 +18,57 @@ html {
 }
 
 body {
+  margin: 0;
+  padding 0;
+  width: 100%;
+  height 100%;
   margin-bottom: 60px;
+}
+
+img {
+    width: 100%; 
+    height: auto; 
+    flex-shrink: 0; 
+    display: block; 
+}
+
+.full-width-image {
+    width: 100%;
+    height: auto;
+    flex-shrink: 0;
+    display: block;
+}
+
+.divider-bar {
+    height: 75px; /* Adjust the thickness of the divider */
+    background: linear-gradient(90deg, #02ED82 0%, #018761 100%);
+    display: block;
+}
+
+.divider-bar {
+    height: auto;
+    background: linear-gradient(90deg, #02ED82 0%, #018761 100%);
+    color: #171717ff; /* Text color */
+    width: 100%;
+    padding: 10px 20px; /* Add some padding around the text */
+    font-size: 24px; /* Adjust the font size as needed */
+    font-weight: bold; /* Makes the text bold */
+    box-sizing: border-box; /* Ensures padding is included in the width */
+}
+
+#carouselExampleIndicators {
+    max-width: 850px; /* Match the slide content width */
+    margin: auto; /* Center the carousel if it's smaller than the full page width */
+}
+
+.carousel-control-prev, .carousel-control-next {
+    filter: invert(100%); /* Adjust color if needed */
+}
+
+.carousel-control-prev {
+    left: calc(-30px + 10%); /* Adjust based on the exact placement you want */
+}
+
+.carousel-control-next {
+    right: calc(-30px + 10%); /* Adjust based on the exact placement you want */
 }
