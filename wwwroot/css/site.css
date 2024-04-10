@@ -18,45 +18,57 @@ html {
 }
 
 body {
+  margin: 0;
+  padding 0;
+  width: 100%;
+  height 100%;
   margin-bottom: 60px;
 }
 
-/* Create a cool animated background effect */
-body {
-  background: linear-gradient(90deg, #10004E, #184075, #215D8A, #21738A, #31A59A, #346CA0, #C147BC, #8D48C2, #6E3996, #4B4689, #2E3476, #4B4689, #6E3996, #8D48C2, #983395, #A051B1, #6452B5, #346CA0, #31A59A, #21738A, #215D8A, #184075, #10004E);
-  background-size: 1200% 1200%;
-  animation: gradient 300s ease infinite;
+img {
+    width: 100%; 
+    height: auto; 
+    flex-shrink: 0; 
+    display: block; 
 }
 
-@keyframes gradient {
-  0%, 100% {
-    background-position: 0% 75%;
-  }
-  10% {
-    background-position: 50% 75%;
-  }
-  20% {
-    background-position: 100% 75%;
-  }
-  30% {
-    background-position: 150% 75%;
-  }
-  40% {
-    background-position: 200% 50%;
-  }
-  50% {
-    background-position: 250% 50%;
-  }
-  60% {
-    background-position: 300% 50%;
-  }
-  70% {
-    background-position: 350% 50%;
-  }
-  80% {
-    background-position: 400% 50%;
-  }
-  90% {
-    background-position: 450% 50%;
-  }
+.full-width-image {
+    width: 100%;
+    height: auto;
+    flex-shrink: 0;
+    display: block;
+}
+
+.divider-bar {
+    height: 75px; /* Adjust the thickness of the divider */
+    background: linear-gradient(90deg, #02ED82 0%, #018761 100%);
+    display: block;
+}
+
+.divider-bar {
+    height: auto;
+    background: linear-gradient(90deg, #02ED82 0%, #018761 100%);
+    color: #171717ff; /* Text color */
+    width: 100%;
+    padding: 10px 20px; /* Add some padding around the text */
+    font-size: 24px; /* Adjust the font size as needed */
+    font-weight: bold; /* Makes the text bold */
+    box-sizing: border-box; /* Ensures padding is included in the width */
+}
+
+#carouselExampleIndicators {
+    max-width: 850px; /* Match the slide content width */
+    margin: auto; /* Center the carousel if it's smaller than the full page width */
+}
+
+.carousel-control-prev, .carousel-control-next {
+    filter: invert(100%); /* Adjust color if needed */
+}
+
+.carousel-control-prev {
+    left: calc(-30px + 10%); /* Adjust based on the exact placement you want */
+}
+
+.carousel-control-next {
+    right: calc(-30px + 10%); /* Adjust based on the exact placement you want */
 }

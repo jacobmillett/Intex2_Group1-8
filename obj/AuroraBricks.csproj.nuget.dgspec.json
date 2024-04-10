@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/Users/stewyman/Desktop/ISWinter2024/Intex2_Group1-8/AuroraBricks.csproj": {}
+    "C:\\Users\\mccoo\\Source\\Repos\\Intex2_Group1-8\\AuroraBricks.csproj": {}
   },
   "projects": {
-    "/Users/stewyman/Desktop/ISWinter2024/Intex2_Group1-8/AuroraBricks.csproj": {
+    "C:\\Users\\mccoo\\Source\\Repos\\Intex2_Group1-8\\AuroraBricks.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/stewyman/Desktop/ISWinter2024/Intex2_Group1-8/AuroraBricks.csproj",
+        "projectUniqueName": "C:\\Users\\mccoo\\Source\\Repos\\Intex2_Group1-8\\AuroraBricks.csproj",
         "projectName": "AuroraBricks",
-        "projectPath": "/Users/stewyman/Desktop/ISWinter2024/Intex2_Group1-8/AuroraBricks.csproj",
-        "packagesPath": "/Users/stewyman/.nuget/packages/",
-        "outputPath": "/Users/stewyman/Desktop/ISWinter2024/Intex2_Group1-8/obj/",
+        "projectPath": "C:\\Users\\mccoo\\Source\\Repos\\Intex2_Group1-8\\AuroraBricks.csproj",
+        "packagesPath": "C:\\Users\\mccoo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\mccoo\\Source\\Repos\\Intex2_Group1-8\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/stewyman/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\mccoo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -32,6 +34,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -53,10 +60,6 @@
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
               "version": "[8.0.3, )"
-            },
-            "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[8.0.4, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -102,7 +105,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.203/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
