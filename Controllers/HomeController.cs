@@ -6,11 +6,12 @@ namespace AuroraBricks.Controllers;
 
 public class HomeController : Controller
 {
-    private IBrixRepository _repo;
 
-    public HomeController(IBrixRepository temp)
+    private readonly ILogger<HomeController> _logger;
+
+    public HomeController(ILogger<HomeController> logger)
     {
-        _repo = temp;
+        _logger = logger;
     }
 
     public IActionResult Index()
@@ -29,10 +30,6 @@ public class HomeController : Controller
     //     return View();
     // }
     //
-    // public IActionResult AboutUs()
-    // {
-    //     return View();
-    // }
     //
     // public IActionResult Cart()
     // {
@@ -43,6 +40,10 @@ public class HomeController : Controller
     //
     //
 
+    public IActionResult AboutUs()
+    {
+        return View();
+    }
     public IActionResult Privacy()
     {
         return View();
