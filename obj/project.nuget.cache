@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "LR+VHDtAtgXX5n5qF9ASxqXuRjkUt61lz31G4n546KKyaUtIwXqIlUz0nYAuH23GL6vAyy3mB/7qqiYZ6jAP6g==",
+  "dgSpecHash": "01rfvN+TzgymK9xFNrUCJDCj0GWLLhX3UpBI/Nb3iUwYxzglxgnDtDGN7O4CcLCywYrqfOi4uNmsPEqjBa+HEA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\calebreese\\Source\\Repos\\Intex2_Group1-8\\AuroraBricks.csproj",
+  "projectFilePath": "C:\\Users\\calebreese\\source\\repos\\Intex2_Group1-8\\AuroraBricks.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\calebreese\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\calebreese\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

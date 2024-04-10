@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\calebreese\\Source\\Repos\\Intex2_Group1-8\\AuroraBricks.csproj": {}
+    "C:\\Users\\calebreese\\source\\repos\\Intex2_Group1-8\\AuroraBricks.csproj": {}
   },
   "projects": {
-    "C:\\Users\\calebreese\\Source\\Repos\\Intex2_Group1-8\\AuroraBricks.csproj": {
+    "C:\\Users\\calebreese\\source\\repos\\Intex2_Group1-8\\AuroraBricks.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\calebreese\\Source\\Repos\\Intex2_Group1-8\\AuroraBricks.csproj",
+        "projectUniqueName": "C:\\Users\\calebreese\\source\\repos\\Intex2_Group1-8\\AuroraBricks.csproj",
         "projectName": "AuroraBricks",
-        "projectPath": "C:\\Users\\calebreese\\Source\\Repos\\Intex2_Group1-8\\AuroraBricks.csproj",
+        "projectPath": "C:\\Users\\calebreese\\source\\repos\\Intex2_Group1-8\\AuroraBricks.csproj",
         "packagesPath": "C:\\Users\\calebreese\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\calebreese\\Source\\Repos\\Intex2_Group1-8\\obj\\",
+        "outputPath": "C:\\Users\\calebreese\\source\\repos\\Intex2_Group1-8\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\calebreese\\AppData\\Roaming\\NuGet\\NuGet.Config",
