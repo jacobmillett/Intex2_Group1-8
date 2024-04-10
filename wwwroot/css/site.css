@@ -103,3 +103,22 @@ img {
     display: flex;
     justify-content: left;
 }
+.btn-darkblue {
+    border-radius: 3px;
+    background-color: #4D47A3;
+    color: white;
+    padding: 10px 20px;
+    border: white;
+}
+
+.centereddiv {
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center;
+}
+.paddingtop {
+    padding-top: 10px;
+}
+.paddingsides{
+    padding: 0px 5px;
+}
