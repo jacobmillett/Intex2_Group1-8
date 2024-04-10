@@ -1,35 +1,36 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin: 0;
-  padding 0;
-  width: 100%;
-  height 100%;
-  margin-bottom: 60px;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding 0;
+    width: 100%;
+    height 100%;
+    margin-bottom: 60px;
 }
 
 img {
-    width: 100%; 
-    height: auto; 
-    flex-shrink: 0; 
-    display: block; 
+    width: 100%;
+    height: auto;
+    flex-shrink: 0;
+    display: block;
 }
 
 .full-width-image {
@@ -71,4 +72,34 @@ img {
 
 .carousel-control-next {
     right: calc(-30px + 10%); /* Adjust based on the exact placement you want */
+}
+
+.carousel-item {
+    text-align: center; /* Center content for inline or inline-block elements */
+}
+
+/* Adjust the width and centering of the carousel itself */
+#carouselExampleControls .carousel-inner {
+    display: flex !important;
+    align-items: center !important; /* This centers the carousel items vertically if needed */
+}
+
+/* Specific styling for carousel images */
+#carouselExampleControls .carousel-item img {
+    max-width: 50%; /* Adjust this value to your preference */
+    margin: auto; /* This centers the image in the carousel-item */
+    height: auto; /* Adjust height as needed, could be auto for aspect ratio */
+    object-fit: contain; /* This prevents the image from being stretched. Use 'cover' to fill the area */
+    border-radius: 15px;
+}
+
+.addToCart-btn {
+    background-color: aquamarine;
+    border-radius: 10px;
+    padding: 10px 100px;
+}
+
+.price-text {
+    display: flex;
+    justify-content: left;
 }
