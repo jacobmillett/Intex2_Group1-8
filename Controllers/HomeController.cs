@@ -28,15 +28,6 @@ public class HomeController : Controller
         return View();
     }
 
-    //public IActionResult ProductList(int pageNum)
-    //{
-    //    int pageSize= 5;
-    //    var query = _context.BrixProducts.AsQueryable()
-    //        .OrderBy(x => x.Name)
-    //        .Skip((pageNum - 1) * pageSize)
-    //        .Take(pageSize);
-    //}
-
     public IActionResult ProductList(int pageNum, string category, string primaryColor)
     {
         int pageSize = 5;
@@ -66,11 +57,17 @@ public class HomeController : Controller
     }
 
 
-    //
-    // public IActionResult ProductDetail()
-    // {
-    //     return View();
-    // }
+
+    public IActionResult ProductDetails(int ProductId)
+    {
+        var product = _context.BrixProducts.FirstOrDefault(p => p.ProductId == ProductId);
+        if (product == null)
+        {
+            return NotFound();
+        }
+        return View(product);
+    }
+
     //
     //
     // public IActionResult Cart()
