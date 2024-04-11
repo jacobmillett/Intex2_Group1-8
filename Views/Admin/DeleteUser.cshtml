@@ -1,0 +1,17 @@
+@model BrixCustomer
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Are you sure that you would like to delete this User?</h2>
+<h3>@Model.FirstName @Model.LastName</h3>
+<form asp-controller="Admin" asp-action="DeleteUser" method="post">
+    <input type="hidden" asp-for="CustomerId" />
+    <button type="submit">Yes, Delete</button>
+    <a class="btn btn-dark" asp-controller="Admin" asp-action="UserCrud">No, Cancel</a>
+</form>
+
+@section Scripts {
+
+}

@@ -37,22 +37,38 @@ public class HomeController : Controller
     public IActionResult CustomerSignUp(BrixCustomer response)
     {
         _repo.AddCustomer(response);
-        
-        return View("/Areas/Identity/Pages/Account/Register.cshtml");
+
+        return View("~/Areas/Identity/Pages/Account/Register.cshtml");
       
     }
+    
+    public IActionResult ProductList(int pageNum, string category, string primaryColor)
+    {
+        int pageSize = 5;
+        var query = _repo.Products
+            .OrderBy(x => x.Name)
+            .Skip((pageNum - 1) * pageSize)
+            .Take(pageSize);
 
+        if (!string.IsNullOrEmpty(category))
+        {
+            query = query.Where(p => p.Category == category);
+        }
 
+        if (!string.IsNullOrEmpty(primaryColor))
+        {
+            query = query.Where(p => p.PrimaryColor == primaryColor);
+        }
 
+        var products = query.OrderBy(p => p.ProductId).ToList();
 
+        ViewBag.Category = category;
+        ViewBag.PrimaryColor = primaryColor;
+        ViewBag.Categories = _repo.Products.Select(p => p.Category).Distinct();
+        ViewBag.PrimaryColors = _repo.Products.Select(p => p.PrimaryColor).Distinct();
 
-
-    //
-    //
-    // public IActionResult ProductList()
-    // {
-    //     return View();
-    // }
+        return View(products);
+    }
     //
     // public IActionResult ProductDetail()
     // {
