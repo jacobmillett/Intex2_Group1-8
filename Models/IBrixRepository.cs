@@ -2,8 +2,15 @@ namespace AuroraBricks.Models;
 
 public interface IBrixRepository
 {
-    public List<BrixCustomer> Customers { get; }
-    public List<BrixOrder> Orders { get;  }
-    public List<BrixProduct> Products { get;  }
-    public List<BrixLineItem> LineItems { get; }
+    public IEnumerable<BrixCustomer> Customers { get; }
+    public IEnumerable<BrixOrder> Orders { get;  }
+    public IEnumerable<BrixProduct> Products { get;  }
+    public IEnumerable<BrixLineItem> LineItems { get; }
+    
+ 
+
+
+    void AddCustomer(BrixCustomer customer);
+
+    BrixCustomer GetLastCustomer();
 }
