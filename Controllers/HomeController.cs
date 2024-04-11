@@ -2,6 +2,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using AuroraBricks.Models;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
+using AuroraBricks.ViewModels;
 
 namespace AuroraBricks.Controllers;
 
@@ -76,10 +77,33 @@ public class HomeController : Controller
     // }
     //
     //
-    public IActionResult Cart()
+    public IActionResult Cart(string returnUrl)
     {
-        return View();
+        var cart = SessionCart.GetCart(HttpContext.RequestServices);
+        var viewModel = new CartViewModel
+        {
+            Cart = cart ?? new Cart(), // Ensure Cart is not null
+            ReturnUrl = returnUrl ?? "/"
+        };
+
+        return View(viewModel);
     }
+
+    [HttpPost]
+    public IActionResult RemoveFromCart(int productId, string returnUrl)
+    {
+        var cart = SessionCart.GetCart(HttpContext.RequestServices);
+        BrixProduct product = _repo.Products
+                                .FirstOrDefault(p => p.ProductId == productId);
+
+        if (product != null)
+        {
+            cart.RemoveLine(product);
+        }
+
+        return RedirectToAction("Cart", new { returnUrl = returnUrl });
+    }
+
     public IActionResult AboutUs()
     {
         return View();

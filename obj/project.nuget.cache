@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "L1JYfpTEEPLikqgQKEB88rUVnHKMTJmJenQrr+mxmSMkpy+c+2+OO80Uqplc5/AdOmaqA2Ivm1IYaIEQWIaemQ==",
+  "dgSpecHash": "cLy6rSRKZXDRCMXSwhxIVNbF3hR+OPEk2zMkFx/KKhB4dYNzc0K65CC0ccFZM/hqecTMaFZZxlQgcNSxWCsHgw==",
   "success": true,
   "projectFilePath": "C:\\Users\\mccoo\\source\\repos\\Intex2_Group1-8\\AuroraBricks.csproj",
   "expectedPackageFiles": [
@@ -83,9 +83,9 @@
     "C:\\Users\\mccoo\\.nuget\\packages\\microsoft.data.sqlite.core\\8.0.3\\microsoft.data.sqlite.core.8.0.3.nupkg.sha512",
     "C:\\Users\\mccoo\\.nuget\\packages\\microsoft.diasymreader\\2.0.0\\microsoft.diasymreader.2.0.0.nupkg.sha512",
     "C:\\Users\\mccoo\\.nuget\\packages\\microsoft.dotnet.scaffolding.shared\\8.0.2\\microsoft.dotnet.scaffolding.shared.8.0.2.nupkg.sha512",
-    "C:\\Users\\mccoo\\.nuget\\packages\\microsoft.entityframeworkcore\\8.0.3\\microsoft.entityframeworkcore.8.0.3.nupkg.sha512",
-    "C:\\Users\\mccoo\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\8.0.3\\microsoft.entityframeworkcore.abstractions.8.0.3.nupkg.sha512",
-    "C:\\Users\\mccoo\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\8.0.3\\microsoft.entityframeworkcore.analyzers.8.0.3.nupkg.sha512",
+    "C:\\Users\\mccoo\\.nuget\\packages\\microsoft.entityframeworkcore\\8.0.4\\microsoft.entityframeworkcore.8.0.4.nupkg.sha512",
+    "C:\\Users\\mccoo\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\8.0.4\\microsoft.entityframeworkcore.abstractions.8.0.4.nupkg.sha512",
+    "C:\\Users\\mccoo\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\8.0.4\\microsoft.entityframeworkcore.analyzers.8.0.4.nupkg.sha512",
     "C:\\Users\\mccoo\\.nuget\\packages\\microsoft.entityframeworkcore.design\\8.0.3\\microsoft.entityframeworkcore.design.8.0.3.nupkg.sha512",
     "C:\\Users\\mccoo\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\8.0.3\\microsoft.entityframeworkcore.relational.8.0.3.nupkg.sha512",
     "C:\\Users\\mccoo\\.nuget\\packages\\microsoft.entityframeworkcore.sqlite\\8.0.3\\microsoft.entityframeworkcore.sqlite.8.0.3.nupkg.sha512",
