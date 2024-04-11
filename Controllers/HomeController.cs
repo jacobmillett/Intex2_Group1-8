@@ -45,7 +45,7 @@ public class HomeController : Controller
     public IActionResult ProductList(int pageNum, string category, string primaryColor)
     {
         int pageSize = 5;
-        var query = _context.BrixProducts.AsQueryable()
+        var query = _repo.Products
             .OrderBy(x => x.Name)
             .Skip((pageNum - 1) * pageSize)
             .Take(pageSize);
@@ -64,8 +64,8 @@ public class HomeController : Controller
 
         ViewBag.Category = category;
         ViewBag.PrimaryColor = primaryColor;
-        ViewBag.Categories = _context.BrixProducts.Select(p => p.Category).Distinct();
-        ViewBag.PrimaryColors = _context.BrixProducts.Select(p => p.PrimaryColor).Distinct();
+        ViewBag.Categories = _repo.Products.Select(p => p.Category).Distinct();
+        ViewBag.PrimaryColors = _repo.Products.Select(p => p.PrimaryColor).Distinct();
 
         return View(products);
     }
