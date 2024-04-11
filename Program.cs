@@ -3,35 +3,57 @@ using Microsoft.EntityFrameworkCore;
 using AuroraBricks.Data;
 using AuroraBricks.Areas.Identity.Data;
 using AuroraBricks.Models;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Options;
 
 internal class Program
 {
     public static async Task Main(string[] args)
     {
+        // When we deploy, uncomment
+        //var identityConnectionString = Environment.GetEnvironmentVariable("ConnectionStrings:DefaultConnection");
+        //var generalConnectionString = Environment.GetEnvironmentVariable("ConnectionStrings:ABrixConnection");
+        
         var builder = WebApplication.CreateBuilder(args);
-        var services = builder.Services;
         var configuration = builder.Configuration;
+        var env = builder.Environment;
+        
+        // Load user secrets
+        var config = new ConfigurationBuilder()
+            .SetBasePath(env.ContentRootPath)
+            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+            .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
+            .AddEnvironmentVariables()
+            .AddUserSecrets<Program>()
+            .Build();
+
+        //Add services to the container.
+        var identityConnectionString = config["ConnectionStrings:DefaultConnection"] ??
+                                       throw new InvalidOperationException("Connection string 'DefaultConnection' not found in user secrets.");
+
+        var generalConnectionString = config["ConnectionStrings:ABrixConnection"] ??
+                                      throw new InvalidOperationException("Connection string 'ABrixConnection' not found in user secrets.");
+
 
         builder.Services.AddAuthentication().AddGoogle(googleOptions =>
         {
-            googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
-            googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
+            googleOptions.ClientId = configuration["Google:ClientId"];
+            googleOptions.ClientSecret = configuration["Google:ClientSecret"];
+            googleOptions.CallbackPath = "/Home/Index"; // Specify your custom callback path here
+
         });
-        services.AddAuthorization(options =>
+        builder.Services.AddAuthorization(options =>
         {
             options.AddPolicy("AdminPolicy", policy =>
             {
                 policy.RequireRole("Admin");
             });
         });
-        // Add services to the container.
-        var identityConnectionString = builder.Configuration.GetConnectionString("DefaultConnection") ??
-                                       throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
         builder.Services.AddDbContext<AuroraBricksIdentityDbContext>(options =>
             options.UseSqlite(identityConnectionString));
 
-        var generalConnectionString = builder.Configuration.GetConnectionString("ABrixConnection") ??
-                                      throw new InvalidOperationException("Connection string 'ABrixConnection' not found.");
+
         builder.Services.AddDbContext<AbrixContext>(options =>
             options.UseSqlite(generalConnectionString));
 
@@ -39,7 +61,13 @@ internal class Program
 
         builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-
+        builder.Services.AddHsts(options =>
+        {
+            options.Preload = true;
+            options.IncludeSubDomains = true;
+            options.MaxAge = TimeSpan.FromDays(60);
+            options.ExcludedHosts.Add("example.com");
+        });
 
 
         builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
@@ -47,6 +75,12 @@ internal class Program
             .AddEntityFrameworkStores<AuroraBricksIdentityDbContext>();
         builder.Services.AddControllersWithViews();
 
+        builder.Services.AddRazorPages();
+        builder.Services.AddDistributedMemoryCache();
+        builder.Services.AddSession();
+        builder.Services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+        builder.Services.AddSingleton<IHttpContextAccessor, 
+            HttpContextAccessor>();
 
         var app = builder.Build();
 

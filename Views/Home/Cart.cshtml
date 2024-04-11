@@ -1,18 +1,43 @@
-@* @model TModel *@
-@* *@
-@* @{ *@
-@*     Layout = null; *@
-@* } *@
-@* *@
-@* <!DOCTYPE html> *@
-@* *@
-@* <html> *@
-@* <head> *@
-@*     <title>title</title> *@
-@* </head> *@
-@* <body> *@
-@* <div> *@
-@*        *@
-@* </div> *@
-@* </body> *@
-@* </html> *@
+@model AuroraBricks.ViewModels.CartViewModel
+
+<h2 class="mb-4">Your Cart</h2>
+
+@if (Model.Cart != null && Model.Cart.Lines.Any())
+{
+    <div class="row g-4">
+        @foreach (var line in Model.Cart.Lines)
+        {
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100">
+                    <img src="@line.Product.ImgLink" class="card-img-top" alt="@line.Product.Name">
+                    <div class="card-body">
+                        <h5 class="card-title">@line.Product.Name</h5>
+                        <p class="card-text">
+                            <strong>Price:</strong> @(line.Product.Price.HasValue ? $"${line.Product.Price.Value}" : "N/A")<br>
+                            <strong>Quantity:</strong> @line.Quantity<br>
+                            <strong>Subtotal:</strong> $@(line.Quantity * (line.Product.Price ?? 0))
+                        </p>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <form asp-action="RemoveFromCart" method="post" class="d-inline">
+                            <input type="hidden" name="productId" value="@line.Product.ProductId" />
+                            <button type="submit" class="btn btn-danger">Remove</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="mt-4">
+        <a href="@Model.ReturnUrl" class="btn btn-secondary">Continue Shopping</a>
+        <a asp-action="Checkout" class="btn btn-success">Checkout</a>
+    </div>
+}
+else
+{
+    <div class="alert alert-warning" role="alert">
+        Your cart is empty.
+    </div>
+    <a href="@Model.ReturnUrl" class="btn btn-primary">Continue Shopping</a>
+}

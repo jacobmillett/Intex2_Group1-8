@@ -20,9 +20,9 @@ html {
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
-    padding: 0;
+    padding 0;
     width: 100%;
-    height: 100%;
+    height 100%;
     margin-bottom: 60px;
 }
 
@@ -93,16 +93,29 @@ img {
     border-radius: 15px;
 }
 
+.product-action {
+    position: relative; /* This makes it the positioning context for absolute children */
+    display: inline-block; /* Or flex, depending on your layout needs */
+}
+
+.price-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: white; /* Or any background */
+    padding: 5px; /* Adjust as needed */
+    border-radius: 5px; /* For rounded corners */
+    transform: translate(-360%, -100%); /* Adjust based on the exact positioning you want */
+    margin-left: 10px; /* Creates a little space between the text and the button */
+}
+
 .addToCart-btn {
+    position: relative; /* To ensure the button is positioned correctly within .product-action */
     background-color: aquamarine;
     border-radius: 10px;
     padding: 10px 100px;
 }
 
-.price-text {
-    display: flex;
-    justify-content: left;
-}
 .btn-darkblue {
     border-radius: 3px;
     background-color: #4D47A3;
@@ -116,13 +129,16 @@ img {
     justify-content: center; /* Centers horizontally */
     align-items: center;
 }
+
 .paddingtop {
     padding-top: 10px;
 }
-.paddingsides{
+
+.paddingsides {
     padding: 0px 5px;
 }
-.formpadding{
+
+.formpadding {
     padding-left: 15%;
     padding-right: 15%;
 }

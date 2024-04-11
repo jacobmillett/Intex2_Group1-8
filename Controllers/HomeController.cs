@@ -2,8 +2,13 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using AuroraBricks.Models;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
+using Microsoft.EntityFrameworkCore;
+using System;
+using AuroraBricks.ViewModels;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+
 namespace AuroraBricks.Controllers;
 
 public class HomeController : Controller
@@ -44,7 +49,48 @@ public class HomeController : Controller
         return View("~/Areas/Identity/Pages/Account/Register.cshtml");
       
     }
+        
+    public IActionResult ProductList(int pageNum, string category, string primaryColor)
+    {
+        int pageSize = 5;
+        var query = _repo.Products
+            .OrderBy(x => x.Name)
+            .Skip((pageNum - 1) * pageSize)
+            .Take(pageSize);
 
+        if (!string.IsNullOrEmpty(category))
+        {
+            query = query.Where(p => p.Category == category);
+        }
+
+        if (!string.IsNullOrEmpty(primaryColor))
+        {
+            query = query.Where(p => p.PrimaryColor == primaryColor);
+        }
+
+        var products = query.OrderBy(p => p.ProductId).ToList();
+
+        ViewBag.Category = category;
+        ViewBag.PrimaryColor = primaryColor;
+        ViewBag.Categories = _repo.Products.Select(p => p.Category).Distinct();
+        ViewBag.PrimaryColors = _repo.Products.Select(p => p.PrimaryColor).Distinct();
+
+        return View(products);
+    }
+
+
+
+    public IActionResult ProductDetail(int ProductId)
+    {
+        var product = _repo.Products.FirstOrDefault(p => p.ProductId == ProductId);
+        if (product == null)
+        {
+            return NotFound();
+        }
+        return View(product);
+    }
+    
+    
     [HttpGet]
     public IActionResult EditCustomerProfile(int id)
     {
@@ -73,35 +119,45 @@ public class HomeController : Controller
 
         return View(customer);
     }
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
     
     
 
     //
     //
-    // public IActionResult ProductList()
-    // {
-    //     return View();
-    // }
-    //
-    // public IActionResult ProductDetail()
-    // {
-    //     return View();
-    // }
-    //
-    //
-    // public IActionResult Cart()
-    // {
-    //     return View();
-    // }
-    //
-    //
-    //
-    //
+    public IActionResult Cart(string returnUrl)
+    {
+        var cart = SessionCart.GetCart(HttpContext.RequestServices);
+        var viewModel = new CartViewModel
+        {
+            Cart = cart ?? new Cart(), // Ensure Cart is not null
+            ReturnUrl = returnUrl ?? "/"
+        };
+
+        return View(viewModel);
+    }
+
+    [HttpPost]
+    public IActionResult RemoveFromCart(int productId, string returnUrl)
+    {
+        var cart = SessionCart.GetCart(HttpContext.RequestServices);
+        BrixProduct product = _repo.Products
+                                .FirstOrDefault(p => p.ProductId == productId);
+
+        if (product != null)
+        {
+            cart.RemoveLine(product);
+        }
+
+        return RedirectToAction("Cart", new { returnUrl = returnUrl });
+    }
 
     public IActionResult AboutUs()
     {
@@ -118,5 +174,8 @@ public class HomeController : Controller
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 
-
+    public IActionResult Checkout()
+    {
+        return RedirectToAction("Cart");
+    }
 }
