@@ -43,6 +43,7 @@ builder.Services.AddHsts(options =>
     options.IncludeSubDomains = true;
     options.MaxAge = TimeSpan.FromDays(60);
     options.ExcludedHosts.Add("example.com");
+});
 
 builder.Services.AddDbContext<AuroraBricksIdentityDbContext>(options =>
     options.UseSqlite(identityConnectionString));
@@ -63,10 +64,6 @@ builder.Services.AddSession();
 builder.Services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
 builder.Services.AddSingleton<IHttpContextAccessor, 
     HttpContextAccessor>();
-
-builder.Services.AddSession();
-builder.Services.AddDistributedMemoryCache();
-
 
 var app = builder.Build();
 
