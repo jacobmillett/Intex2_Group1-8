@@ -70,7 +70,7 @@ internal class Program
         });
 
 
-        builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+        builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
             .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<AuroraBricksIdentityDbContext>();
         builder.Services.AddControllersWithViews();
@@ -111,8 +111,7 @@ internal class Program
 
         using (var scope = app.Services.CreateScope())
         {
-            var roleManager =
-                scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
             var roles = new[] { "Admin", "Customer" };
 
@@ -121,7 +120,36 @@ internal class Program
                 if (!await roleManager.RoleExistsAsync(role))
                     await roleManager.CreateAsync(new IdentityRole(role));
             }
+        }
 
+        using (var scope = app.Services.CreateScope())
+        {
+            var userManager =
+                scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+            string email = "admin@admin.com";
+            string password = "Test123!";
+            string email1 = "elizabethswannlover@gmail.com";
+            string password1 = "Sparrow123!";
+            if (await userManager.FindByEmailAsync(email) == null)
+            {
+                var user = new IdentityUser();
+                user.UserName = email;
+                user.Email = email;
+
+                await userManager.CreateAsync(user, password);
+
+                await userManager.AddToRoleAsync(user, "Admin");
+            }
+            if (await userManager.FindByEmailAsync(email1) == null)
+            {
+                var user = new IdentityUser();
+                user.UserName = email1;
+                user.Email = email1;
+
+                await userManager.CreateAsync(user, password1);
+
+                await userManager.AddToRoleAsync(user, "Customer");
+            }
 
         }
         app.Run();

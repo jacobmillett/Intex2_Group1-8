@@ -8,6 +8,7 @@ public interface IBrixRepository
     public IEnumerable<BrixLineItem> LineItems { get; }
     
  
+    Task<BrixCustomer> GetBrixCustomerByEmailAsync(string email);
 
 
     void AddCustomer(BrixCustomer customer);

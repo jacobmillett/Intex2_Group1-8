@@ -45,6 +45,7 @@ public partial class AbrixContext : DbContext
             entity.Property(e => e.FirstName).HasColumnName("first_name");
             entity.Property(e => e.Gender).HasColumnName("gender");
             entity.Property(e => e.LastName).HasColumnName("last_name");
+            entity.Property(e => e.Role).HasColumnName("Role");
         });
 
         modelBuilder.Entity<BrixLineItem>(entity =>

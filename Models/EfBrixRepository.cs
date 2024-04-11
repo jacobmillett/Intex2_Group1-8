@@ -1,5 +1,8 @@
 namespace AuroraBricks.Models;
-
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using AuroraBricks.Data;
+using AuroraBricks.Models;
 public class EfBrixRepository : IBrixRepository
 {
     private AbrixContext _context;
@@ -58,6 +61,10 @@ public class EfBrixRepository : IBrixRepository
     {
         
         return _context.BrixProducts.OrderByDescending(x => x.ProductId).FirstOrDefault();
+    }
+    public async Task<BrixCustomer> GetBrixCustomerByEmailAsync(string email)
+    {
+        return await _context.BrixCustomers.FirstOrDefaultAsync(c => c.Email == email);
     }
 }
 

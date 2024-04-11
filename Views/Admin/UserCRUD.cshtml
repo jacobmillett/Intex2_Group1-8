@@ -2,6 +2,10 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 @model List<BrixCustomer>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@inject RoleManager<IdentityRole> RoleManager
 
 <table class="table table-bordered">
     <thead class="fw-bold">
@@ -13,6 +17,7 @@
         <td>Gender</td>
         <td>Country of Residence</td>
         <td>Email</td>
+        <td>Role</td>
 
     </tr>
     </thead>
@@ -28,8 +33,28 @@
             <td>@x.Gender</td>
             <td>@x.CountryOfResidence</td>
             <td>@x.Email</td>
+            @if (@x.Email != null)
+            {
+                <td>
+                    @{
+                        var user = await UserManager.FindByEmailAsync(x.Email);
+                        var roles = await UserManager.GetRolesAsync(user);
+                        <ul>
+                            @foreach (var role in roles)
+                            {
+                                <li>@role</li>
+                            }
+                        </ul>}
+                </td>
+            }
+            else
+            {
+               <td>None</td> 
+            }
             
-            
+
+
+
             <td><a class="btn btn-toolbar" asp-controller="Admin" asp-action="EditUser" asp-route-id="@x.CustomerId">Edit</a></td> 
             <td><a class="btn btn-danger" asp-controller="Admin" asp-action="DeleteUser" asp-route-id ="@x.CustomerId">Delete</a></td> 
     

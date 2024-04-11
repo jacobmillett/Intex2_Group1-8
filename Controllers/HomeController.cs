@@ -1,9 +1,13 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using AuroraBricks.Models;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
 using Microsoft.EntityFrameworkCore;
 using System;
 using AuroraBricks.ViewModels;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace AuroraBricks.Controllers;
 
@@ -12,8 +16,10 @@ public class HomeController : Controller
 
     private IBrixRepository _repo;
 
-    public HomeController(IBrixRepository temp)
+    private readonly UserManager<IdentityUser> _userManager;
+    public HomeController(IBrixRepository temp, UserManager<IdentityUser> userManager)
     {
+        _userManager = userManager;
         _repo = temp;
     }
 
@@ -43,7 +49,7 @@ public class HomeController : Controller
         return View("~/Areas/Identity/Pages/Account/Register.cshtml");
       
     }
-    
+        
     public IActionResult ProductList(int pageNum, string category, string primaryColor)
     {
         int pageSize = 5;
@@ -83,6 +89,46 @@ public class HomeController : Controller
         }
         return View(product);
     }
+    
+    
+    [HttpGet]
+    public IActionResult EditCustomerProfile(int id)
+    {
+        var recordToEdit = _repo.Customers
+            .Single(x => x.CustomerId == id);
+
+        return View("CustomerSignUp", recordToEdit);
+    }
+
+    
+    
+    [HttpPost]
+    public IActionResult EditCustomerProfile(BrixCustomer customer)
+    {
+
+        _repo.EditUser(customer);
+        return RedirectToAction("CustomerProfile");
+        
+    }
+    
+    [HttpGet]
+    public async Task<IActionResult> CustomerProfile()
+    {
+        var userEmail = _userManager.GetUserAsync(User).Result?.Email;
+        var customer = await _repo.GetBrixCustomerByEmailAsync(userEmail);
+
+        return View(customer);
+    }
+
+
+
+
+
+
+
+
+    
+    
 
     //
     //

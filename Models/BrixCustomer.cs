@@ -25,4 +25,7 @@ public partial class BrixCustomer
     public double? Age { get; set; }
 
     public string? Email { get; set; }
+
+    public string? Role { get; set; }
 }
+
