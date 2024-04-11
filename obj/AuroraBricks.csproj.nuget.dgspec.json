@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jacob\\Source\\Repos\\jacobmillett\\Intex2_Group1-8\\AuroraBricks.csproj": {}
+    "/Users/stewyman/Desktop/ISWinter2024/Intex2_Group1-8/AuroraBricks.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jacob\\Source\\Repos\\jacobmillett\\Intex2_Group1-8\\AuroraBricks.csproj": {
+    "/Users/stewyman/Desktop/ISWinter2024/Intex2_Group1-8/AuroraBricks.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jacob\\Source\\Repos\\jacobmillett\\Intex2_Group1-8\\AuroraBricks.csproj",
+        "projectUniqueName": "/Users/stewyman/Desktop/ISWinter2024/Intex2_Group1-8/AuroraBricks.csproj",
         "projectName": "AuroraBricks",
-        "projectPath": "C:\\Users\\jacob\\Source\\Repos\\jacobmillett\\Intex2_Group1-8\\AuroraBricks.csproj",
-        "packagesPath": "C:\\Users\\jacob\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jacob\\Source\\Repos\\jacobmillett\\Intex2_Group1-8\\obj\\",
+        "projectPath": "/Users/stewyman/Desktop/ISWinter2024/Intex2_Group1-8/AuroraBricks.csproj",
+        "packagesPath": "/Users/stewyman/.nuget/packages/",
+        "outputPath": "/Users/stewyman/Desktop/ISWinter2024/Intex2_Group1-8/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\jacob\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/stewyman/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -34,11 +32,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -55,7 +48,7 @@
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.0.3, )"
+              "version": "[8.0.4, )"
             },
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
@@ -69,21 +62,21 @@
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.3, )"
+              "version": "[8.0.4, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[8.0.3, )"
+              "version": "[8.0.4, )"
             },
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
-              "version": "[8.0.3, )"
+              "version": "[8.0.4, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.3, )"
+              "version": "[8.0.4, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
@@ -109,7 +102,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
