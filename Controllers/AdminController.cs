@@ -3,9 +3,12 @@ using AuroraBricks.Areas.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using AuroraBricks.Models;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace AuroraBricks.Controllers;
 
+[Authorize(Policy = "AdminPolicy")]
 public class AdminController : Controller
 {
         private IBrixRepository _repo;
