@@ -1,8 +1,8 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using AuroraBricks.Models;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
-using AuroraBricks.ViewModels;
+using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace AuroraBricks.Controllers;
 
@@ -70,11 +70,19 @@ public class HomeController : Controller
 
         return View(products);
     }
-    //
-    // public IActionResult ProductDetail()
-    // {
-    //     return View();
-    // }
+
+
+
+    public IActionResult ProductDetails(int ProductId)
+    {
+        var product = _context.BrixProducts.FirstOrDefault(p => p.ProductId == ProductId);
+        if (product == null)
+        {
+            return NotFound();
+        }
+        return View(product);
+    }
+
     //
     //
     public IActionResult Cart(string returnUrl)
