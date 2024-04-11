@@ -39,6 +39,8 @@ internal class Program
         {
             googleOptions.ClientId = configuration["Google:ClientId"];
             googleOptions.ClientSecret = configuration["Google:ClientSecret"];
+            googleOptions.CallbackPath = "/Home/Index"; // Specify your custom callback path here
+
         });
         builder.Services.AddAuthorization(options =>
         {
