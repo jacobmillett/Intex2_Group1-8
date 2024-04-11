@@ -10,8 +10,8 @@ var configuration = builder.Configuration;
 
 builder.Services.AddAuthentication().AddGoogle(googleOptions =>
 {
-    googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
-    googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
+    googleOptions.ClientId = configuration["GoogleClientId"];
+    googleOptions.ClientSecret = configuration["GoogleClientSecret"];
 });
 // Add services to the container.
 var identityConnectionString = builder.Configuration.GetConnectionString("DefaultConnection") ??
@@ -61,6 +61,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
