@@ -41,5 +41,6 @@ namespace AuroraBricks.Views.Home
                 cl.Product.ProductId == productId).Product);
             return RedirectToPage(new { returnUrl = returnUrl });
         }
+        
     }
 }

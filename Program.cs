@@ -37,10 +37,10 @@ internal class Program
 
         builder.Services.AddAuthentication().AddGoogle(googleOptions =>
         {
-            googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
-            googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
+            googleOptions.ClientId = configuration["Google:ClientId"];
+            googleOptions.ClientSecret = configuration["Google:ClientSecret"];
         });
-        services.AddAuthorization(options =>
+        builder.Services.AddAuthorization(options =>
         {
             options.AddPolicy("AdminPolicy", policy =>
             {
