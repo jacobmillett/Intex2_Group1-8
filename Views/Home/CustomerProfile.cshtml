@@ -41,7 +41,15 @@
                 <td><h3>Country of Residence:</h3></td>
                 <td><h3>@Model.CountryOfResidence</h3></td>
             </tr>
+            <tr>
+                <td>
+                    <a class="btn btn-toolbar" asp-controller="Home" asp-action="CustomerSignUp" asp-route-id="@Model.CustomerId">Edit</a>
+                </td>
+            </tr>
         </table>
+        
+ 
+        
     </div>
 }
 else

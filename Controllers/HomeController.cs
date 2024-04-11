@@ -44,8 +44,28 @@ public class HomeController : Controller
         return View("~/Areas/Identity/Pages/Account/Register.cshtml");
       
     }
+
+    [HttpGet]
+    public IActionResult EditCustomerProfile(int id)
+    {
+        var recordToEdit = _repo.Customers
+            .Single(x => x.CustomerId == id);
+
+        return View("CustomerSignUp", recordToEdit);
+    }
+
     
     
+    [HttpPost]
+    public IActionResult EditCustomerProfile(BrixCustomer customer)
+    {
+
+        _repo.EditUser(customer);
+        return RedirectToAction("CustomerProfile");
+        
+    }
+    
+    [HttpGet]
     public async Task<IActionResult> CustomerProfile()
     {
         var userEmail = _userManager.GetUserAsync(User).Result?.Email;
