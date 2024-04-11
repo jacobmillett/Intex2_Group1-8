@@ -1,5 +1,13 @@
+@* @model IEnumerable<AuroraBrix.Models.OrderPrediction> *@
+
 @{
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+    var class_type_dict = new Dictionary<int, string>
+    {
+        { 0, "Not Fraud" },
+        { 1, "Fraud" }
+    };
 }
 @model List<BrixOrder>
 
