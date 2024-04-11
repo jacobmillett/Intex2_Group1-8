@@ -1,0 +1,68 @@
+@model BrixCustomer
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@using Microsoft.EntityFrameworkCore
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class = centereddiv>
+    <h1>Customer Profile</h1>  
+</div>
+<br/>
+<br/>
+@if (Model != null)
+{
+    <div class="centereddiv border formpadding">
+        <table>
+            <tr>
+                <td><h3>Name:</h3></td>
+                <td><h3>@Model.FirstName @Model.LastName</h3></td>
+            </tr>
+            <tr>
+                <td><h3>Birth Date:</h3></td>
+                <td><h3>@Model.BirthDate</h3></td>
+            </tr>
+            <tr>
+                <td><h3>Age:</h3></td>
+                <td><h3>@Model.Age</h3></td>
+            </tr>
+            <tr>
+                <td><h3>Gender:</h3></td>
+                <td><h3>@Model.Gender</h3></td>
+            </tr>
+            <tr>
+                <td><h3>Email:</h3></td>
+                <td><h3>@Model.Email</h3></td>
+            </tr>
+            <tr>
+                <td><h3>Country of Residence:</h3></td>
+                <td><h3>@Model.CountryOfResidence</h3></td>
+            </tr>
+        </table>
+    </div>
+}
+else
+{
+    <div><h3>No customer information found for the logged-in user.</h3></div>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@section Scripts {
+
+}

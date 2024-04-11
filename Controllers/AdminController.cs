@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using AuroraBricks.Models;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 
 namespace AuroraBricks.Controllers;
@@ -11,12 +12,14 @@ namespace AuroraBricks.Controllers;
 [Authorize(Policy = "AdminPolicy")]
 public class AdminController : Controller
 {
+        private readonly UserManager<IdentityUser> _userManager;
         private IBrixRepository _repo;
         
            
-        public AdminController(IBrixRepository temp)
+        public AdminController(IBrixRepository temp, UserManager<IdentityUser> userManager)
         {
                 _repo = temp;
+                _userManager = userManager;
         }
         
         [HttpGet]
@@ -25,13 +28,23 @@ public class AdminController : Controller
                 var recordToEdit = _repo.Customers
                         .Single(x => x.CustomerId == id);
 
-                return View("~/Views/Home/CustomerSignUp.cshtml", recordToEdit);
+                return View("EditUser", recordToEdit);
         }
         
         [HttpPost]
-        public IActionResult EditUser(BrixCustomer customer)
+        public async Task<IActionResult>EditUser(BrixCustomer customer)
         {
                 _repo.EditUser(customer);
+
+                if (customer.Email != null)
+                {
+                        var user = await _userManager.FindByEmailAsync(customer.Email);
+                        var userRoles = await _userManager.GetRolesAsync(user);
+                        await _userManager.RemoveFromRolesAsync(user, userRoles.ToArray());
+                        await _userManager.AddToRoleAsync(user, customer.Role);
+                }
+
+
                 return RedirectToAction("UserCrud");
         }
         
