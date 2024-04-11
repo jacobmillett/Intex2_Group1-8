@@ -9,8 +9,22 @@ public class EfBrixRepository : IBrixRepository
         _context = temp;
     }
     
-    public List<BrixCustomer> Customers => _context.BrixCustomers.ToList();
-    public List<BrixOrder> Orders => _context.BrixOrders.ToList();
-    public List<BrixProduct> Products => _context.BrixProducts.ToList();
-    public List<BrixLineItem> LineItems => _context.BrixLineItems.ToList();
+    public IEnumerable<BrixCustomer> Customers => _context.BrixCustomers.ToList();
+    public IEnumerable<BrixOrder> Orders => _context.BrixOrders.ToList();
+    public IEnumerable<BrixProduct> Products => _context.BrixProducts.ToList();
+    public IEnumerable<BrixLineItem> LineItems => _context.BrixLineItems.ToList();
+
+    public void AddCustomer(BrixCustomer customer)
+    {
+        _context.Add(customer);
+        _context.SaveChanges();
+    }
+    
+    
+    public BrixCustomer GetLastCustomer()
+    {
+        
+        return _context.BrixCustomers.OrderByDescending(c => c.CustomerId).FirstOrDefault();
+    }
 }
+
