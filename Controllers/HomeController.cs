@@ -37,8 +37,8 @@ public class HomeController : Controller
     public IActionResult CustomerSignUp(BrixCustomer response)
     {
         _repo.AddCustomer(response);
-        
-        return View("/Areas/Identity/Pages/Account/Register.cshtml");
+
+        return View("~/Areas/Identity/Pages/Account/Register.cshtml");
       
     }
     
