@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "hb1r82aHcUv5eSH8+jvAhbEJIOb1DQ+mBPFGU0/FdyVhxRswpatGU0CoD1gx7MERFGEBNvLBGbeOcyC3BbIv1A==",
+  "dgSpecHash": "ygnI6E6iqB6qDkXsmHdS9SgzY4dwxhjFjMnVITnVkrJTz2AbAHzdwmTJOwThBIXeFYySDaqhWpCd99zr4/Jl+Q==",
   "success": true,
   "projectFilePath": "/Users/stewyman/Desktop/ISWinter2024/Intex2_Group1-8/AuroraBricks.csproj",
   "expectedPackageFiles": [
@@ -114,6 +114,8 @@
     "/Users/stewyman/.nuget/packages/microsoft.identitymodel.protocols/6.35.0/microsoft.identitymodel.protocols.6.35.0.nupkg.sha512",
     "/Users/stewyman/.nuget/packages/microsoft.identitymodel.protocols.openidconnect/6.35.0/microsoft.identitymodel.protocols.openidconnect.6.35.0.nupkg.sha512",
     "/Users/stewyman/.nuget/packages/microsoft.identitymodel.tokens/6.35.0/microsoft.identitymodel.tokens.6.35.0.nupkg.sha512",
+    "/Users/stewyman/.nuget/packages/microsoft.ml.onnxruntime/1.17.3/microsoft.ml.onnxruntime.1.17.3.nupkg.sha512",
+    "/Users/stewyman/.nuget/packages/microsoft.ml.onnxruntime.managed/1.17.3/microsoft.ml.onnxruntime.managed.1.17.3.nupkg.sha512",
     "/Users/stewyman/.nuget/packages/microsoft.net.stringtools/17.8.3/microsoft.net.stringtools.17.8.3.nupkg.sha512",
     "/Users/stewyman/.nuget/packages/microsoft.netcore.platforms/5.0.0/microsoft.netcore.platforms.5.0.0.nupkg.sha512",
     "/Users/stewyman/.nuget/packages/microsoft.netcore.targets/1.1.0/microsoft.netcore.targets.1.1.0.nupkg.sha512",
@@ -158,7 +160,7 @@
     "/Users/stewyman/.nuget/packages/system.identitymodel.tokens.jwt/6.35.0/system.identitymodel.tokens.jwt.6.35.0.nupkg.sha512",
     "/Users/stewyman/.nuget/packages/system.io.filesystem.accesscontrol/5.0.0/system.io.filesystem.accesscontrol.5.0.0.nupkg.sha512",
     "/Users/stewyman/.nuget/packages/system.io.pipelines/7.0.0/system.io.pipelines.7.0.0.nupkg.sha512",
-    "/Users/stewyman/.nuget/packages/system.memory/4.5.4/system.memory.4.5.4.nupkg.sha512",
+    "/Users/stewyman/.nuget/packages/system.memory/4.5.5/system.memory.4.5.5.nupkg.sha512",
     "/Users/stewyman/.nuget/packages/system.memory.data/1.0.2/system.memory.data.1.0.2.nupkg.sha512",
     "/Users/stewyman/.nuget/packages/system.numerics.vectors/4.5.0/system.numerics.vectors.4.5.0.nupkg.sha512",
     "/Users/stewyman/.nuget/packages/system.reflection.metadata/7.0.0/system.reflection.metadata.7.0.0.nupkg.sha512",

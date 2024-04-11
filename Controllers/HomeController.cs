@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using AuroraBricks.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
+using AuroraBricks.ViewModels;
 
 namespace AuroraBricks.Controllers;
 
@@ -73,9 +74,9 @@ public class HomeController : Controller
 
 
 
-    public IActionResult ProductDetails(int ProductId)
+    public IActionResult ProductDetail(int ProductId)
     {
-        var product = _context.BrixProducts.FirstOrDefault(p => p.ProductId == ProductId);
+        var product = _repo.Products.FirstOrDefault(p => p.ProductId == ProductId);
         if (product == null)
         {
             return NotFound();

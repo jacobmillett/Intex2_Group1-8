@@ -16,15 +16,15 @@ namespace AuroraBricks.Controllers;
 public class AdminController : Controller
 {
         private IBrixRepository _repo;
-        private readonly string _onnxModelPath;
+        // private readonly string _onnxModelPath;
         
            
         public AdminController(IBrixRepository temp)
         {
             _repo = temp;
 
-            _onnxModelPath = System.IO.Path.Combine(HostEnvironment.ContentRootPath, "fraudModel.onnx");
-            _session = new InterfaceSession(_onnxModelPath)
+            // _onnxModelPath = System.IO.Path.Combine(HostEnvironment.ContentRootPath, "fraudModel.onnx");
+            // _session = new InterfaceSession(_onnxModelPath);
 
         }
         
@@ -78,61 +78,61 @@ public class AdminController : Controller
                         .ToList();
                 return View(orders);
 
-        var predictions = new List<OrderPrediction>(); //This is the ViewModel for the view
-
-        var class_type_dict = new Dictionary<int, string>
-                {
-                    { 0, "Not Fraud" },
-                    { 1, "Fraud" }
-                };
-        foreach (var order in orders)
-        {
-            //Calculate days since
-            var jan1_22 = new DateTime(2022, 1, 1);
-            var daysSinceJan1_22 = order.Date.HasValue ? Math.Abs((order.Date.Value - jan1_22).Days) : 0;
-
-            //Preprocess features to make compatible with model
-            var input = new List<float>
-            {
-                (float)order.CustomerId,
-                (float)order.Time,
-                //Fix amount if not null
-                (float)(order.Amount ?? 0),
-
-                //Fix date
-                daysSinceJan1_22,
-
-                //Fill in here with dummy code data
-
-
-                //Use CountryOfTransaction if ShippingAddress is null
-                (order.ShippingAddress ?? order.CountryOfTransaction) == "India" ? 1 : 0,
-                (order.ShippingAddress ?? order.CountryOfTransaction) == "Russia" ? 1 : 0,
-                (order.ShippingAddress ?? order.CountryOfTransaction) == "USA" ? 1 : 0,
-                (order.ShippingAddress ?? order.CountryOfTransaction) == "UnitedKingdom" ? 1 : 0,
-
-                //More dummy code
-
-                order.TypeOfCard == "Visa" ? 1 : 0
-            };
-            var inputTensor = new DenseTensor<float>(input.ToArray(), new[] {1, input.Count });
-
-            var inputs = new List<NamedOnnxValue>
-            {
-                NamedOnnxValue.CreateFromTensor("float_input", inputTensor)
-            };
-
-            string predictionResult;
-            using (var results = _session.Run(inputs))
-            {
-                var prediction = results.FirstOrDefault(BrixLineItem => BrixLineItem.Name == "output_label")?.AsTensor<long>();
-                predictionResult = prediction != null && prediction.Length > 0 ? class_type_dict.GetValueOrDefault((int)prediction[0], "Unknown") : "Error in prediction";
-            }
-
-            predictions.Add(new OrderPrediction { Orders = order, Prediction = predictionResult });
-        }
-
-        return View(predictions);
+        // var predictions = new List<OrderPrediction>(); //This is the ViewModel for the view
+        //
+        // var class_type_dict = new Dictionary<int, string>
+        //         {
+        //             { 0, "Not Fraud" },
+        //             { 1, "Fraud" }
+        //         };
+        // foreach (var order in orders)
+        // {
+        //     //Calculate days since
+        //     var jan1_22 = new DateTime(2022, 1, 1);
+        //     var daysSinceJan1_22 = order.Date.HasValue ? Math.Abs((order.Date.Value - jan1_22).Days) : 0;
+        //
+        //     //Preprocess features to make compatible with model
+        //     var input = new List<float>
+        //     {
+        //         (float)order.CustomerId,
+        //         (float)order.Time,
+        //         //Fix amount if not null
+        //         (float)(order.Amount ?? 0),
+        //
+        //         //Fix date
+        //         daysSinceJan1_22,
+        //
+        //         //Fill in here with dummy code data
+        //
+        //
+        //         //Use CountryOfTransaction if ShippingAddress is null
+        //         (order.ShippingAddress ?? order.CountryOfTransaction) == "India" ? 1 : 0,
+        //         (order.ShippingAddress ?? order.CountryOfTransaction) == "Russia" ? 1 : 0,
+        //         (order.ShippingAddress ?? order.CountryOfTransaction) == "USA" ? 1 : 0,
+        //         (order.ShippingAddress ?? order.CountryOfTransaction) == "UnitedKingdom" ? 1 : 0,
+        //
+        //         //More dummy code
+        //
+        //         order.TypeOfCard == "Visa" ? 1 : 0
+        //     };
+        //     var inputTensor = new DenseTensor<float>(input.ToArray(), new[] {1, input.Count });
+        //
+        //     var inputs = new List<NamedOnnxValue>
+        //     {
+        //         NamedOnnxValue.CreateFromTensor("float_input", inputTensor)
+        //     };
+        //
+        //     string predictionResult;
+        //     using (var results = _session.Run(inputs))
+        //     {
+        //         var prediction = results.FirstOrDefault(BrixLineItem => BrixLineItem.Name == "output_label")?.AsTensor<long>();
+        //         predictionResult = prediction != null && prediction.Length > 0 ? class_type_dict.GetValueOrDefault((int)prediction[0], "Unknown") : "Error in prediction";
+        //     }
+        //
+        //     predictions.Add(new OrderPrediction { Orders = order, Prediction = predictionResult });
+        // }
+        //
+        // return View(predictions);
 
         }
         
@@ -213,4 +213,3 @@ public class AdminController : Controller
          }
                  
  }
-//
