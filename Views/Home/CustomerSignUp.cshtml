@@ -1,0 +1,74 @@
+@model AuroraBricks.Models.BrixCustomer
+
+@{
+    ViewData["Title"] = "Customer Sign Up";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+    <div class="row formpadding">
+        <div class="centereddiv formpadding">
+            
+            <form method="post" class="row">
+                <input type = "hidden" asp-for="CustomerId" />
+                <h2>Register Below</h2>
+                <hr/>
+                <div class="text-danger" role="alert"></div>
+                <div class="form-floating mb-3">
+                    <input asp-for="FirstName" class="form-control"/>
+                    <label asp-for="FirstName">First Name</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="LastName" class="form-control"/>
+                    <label asp-for="LastName">Last Name</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Age" class="form-control"/>
+                    <label asp-for="Age">Age</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="BirthDate" class="form-control"/>
+                    <label asp-for="BirthDate">Birth Date</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <select asp-for="Gender" class="form-control">
+                        <option value="M">Male</option>
+                        <option value="F">Female</option>
+                    </select>
+                    <label asp-for="Gender">Gender</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <select asp-for="CountryOfResidence" class="form-control">
+                        <option>USA</option>
+                        <option>China</option>
+                        <option>Russia</option>
+                        <option>United Kingdom</option>
+                        <option>India</option>
+                    </select>
+                    <label asp-for="CountryOfResidence">Country of Residence</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Email" class="form-control"/>
+                    <label asp-for="Email">Email</label>
+                </div>
+
+                <div class="formpadding">
+                    <div class="formpadding">
+                        <div class="formpadding">
+                            <button class="btn-darkblue centereddiv formpadding" asp-action="CustomerSignUp">Register</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
+@section Scripts {
+
+}
