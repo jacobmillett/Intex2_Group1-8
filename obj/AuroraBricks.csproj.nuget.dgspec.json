@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jacob\\Source\\Repos\\jacobmillett\\Intex2_Group1-8\\AuroraBricks.csproj": {}
+    "C:\\Users\\stewyman\\Source\\Repos\\jacobmillett\\Intex2_Group1-8\\AuroraBricks.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jacob\\Source\\Repos\\jacobmillett\\Intex2_Group1-8\\AuroraBricks.csproj": {
+    "C:\\Users\\stewyman\\Source\\Repos\\jacobmillett\\Intex2_Group1-8\\AuroraBricks.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jacob\\Source\\Repos\\jacobmillett\\Intex2_Group1-8\\AuroraBricks.csproj",
+        "projectUniqueName": "C:\\Users\\stewyman\\Source\\Repos\\jacobmillett\\Intex2_Group1-8\\AuroraBricks.csproj",
         "projectName": "AuroraBricks",
-        "projectPath": "C:\\Users\\jacob\\Source\\Repos\\jacobmillett\\Intex2_Group1-8\\AuroraBricks.csproj",
-        "packagesPath": "C:\\Users\\jacob\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jacob\\Source\\Repos\\jacobmillett\\Intex2_Group1-8\\obj\\",
+        "projectPath": "C:\\Users\\stewyman\\Source\\Repos\\jacobmillett\\Intex2_Group1-8\\AuroraBricks.csproj",
+        "packagesPath": "C:\\Users\\stewyman\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\stewyman\\Source\\Repos\\jacobmillett\\Intex2_Group1-8\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\jacob\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\stewyman\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -55,7 +55,7 @@
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.0.3, )"
+              "version": "[8.0.4, )"
             },
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
@@ -69,21 +69,21 @@
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.3, )"
+              "version": "[8.0.4, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[8.0.3, )"
+              "version": "[8.0.4, )"
             },
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
-              "version": "[8.0.3, )"
+              "version": "[8.0.4, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.3, )"
+              "version": "[8.0.4, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
