@@ -4,26 +4,51 @@ using AuroraBricks.Data;
 using AuroraBricks.Areas.Identity.Data;
 using AuroraBricks.Models;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
-var services = builder.Services;
 var configuration = builder.Configuration;
+var env = builder.Environment;
+
+// When we deploy, uncomment
+//var identityConnectionString = Environment.GetEnvironmentVariable("ConnectionStrings:DefaultConnection");
+//var generalConnectionString = Environment.GetEnvironmentVariable("ConnectionStrings:ABrixConnection");
+
+
+// Load user secrets
+var config = new ConfigurationBuilder()
+    .SetBasePath(env.ContentRootPath)
+    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
+    .AddEnvironmentVariables()
+    .AddUserSecrets<Program>()
+    .Build();
+
+//Add services to the container.
+var identityConnectionString = config["ConnectionStrings:DefaultConnection"] ??
+                               throw new InvalidOperationException("Connection string 'DefaultConnection' not found in user secrets.");
+
+var generalConnectionString = config["ConnectionStrings:ABrixConnection"] ??
+                              throw new InvalidOperationException("Connection string 'ABrixConnection' not found in user secrets.");
 
 builder.Services.AddAuthentication().AddGoogle(googleOptions =>
 {
     googleOptions.ClientId = configuration["Google:ClientId"];
     googleOptions.ClientSecret = configuration["Google:ClientSecret"];
 });
-//Add services to the container.
-var identityConnectionString = builder.Configuration.GetConnectionString("DefaultConnection") ??
-                               throw new InvalidOperationException("Connection string 'app' not found.");
+
+builder.Services.AddHsts(options =>
+{
+    options.Preload = true;
+    options.IncludeSubDomains = true;
+    options.MaxAge = TimeSpan.FromDays(60);
+    options.ExcludedHosts.Add("example.com");
+
 builder.Services.AddDbContext<AuroraBricksIdentityDbContext>(options =>
     options.UseSqlite(identityConnectionString));
 
-var generalConnectionString = builder.Configuration.GetConnectionString("ABrixConnection") ??
-                              throw new InvalidOperationException("Connection string 'ABrixConnection' not found.");
 builder.Services.AddDbContext<AbrixContext>(options =>
-    options.UseSqlite(generalConnectionString));
+    options.UseSqlServer(generalConnectionString));
 
 builder.Services.AddScoped<IBrixRepository, EfBrixRepository>();
 
@@ -41,6 +66,7 @@ builder.Services.AddSingleton<IHttpContextAccessor,
 
 builder.Services.AddSession();
 builder.Services.AddDistributedMemoryCache();
+
 
 var app = builder.Build();
 
