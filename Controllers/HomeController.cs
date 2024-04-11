@@ -41,11 +41,11 @@ public class HomeController : Controller
         return View("/Areas/Identity/Pages/Account/Register.cshtml");
       
     }
-    
-    
-    
-    
-    
+
+
+
+
+
 
     //
     //
@@ -60,15 +60,10 @@ public class HomeController : Controller
     // }
     //
     //
-    // public IActionResult Cart()
-    // {
-    //     return View();
-    // }
-    //
-    //
-    //
-    //
-
+    public IActionResult Cart()
+    {
+        return View();
+    }
     public IActionResult AboutUs()
     {
         return View();
