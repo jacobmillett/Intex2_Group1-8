@@ -4,7 +4,8 @@
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
 # User-specific files
-*AssemblyInfo.cs
+*.AssemblyInfo.cs
+*.AssemblyInfoInputs.cs
 *.cache
 *.editorconfig
 *.MvcApplicationPartsAssemblyInfo.cs
@@ -66,8 +67,8 @@ BenchmarkDotNet.Artifacts/
 project.lock.json
 project.fragment.lock.json
 artifacts/
-bin/
-obj/
+bin
+obj
 
 # ASP.NET Scaffolding
 ScaffoldingReadMe.txt
