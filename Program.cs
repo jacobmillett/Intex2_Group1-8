@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using AuroraBricks.Data;
 using AuroraBricks.Areas.Identity.Data;
 using AuroraBricks.Models;
+using Microsoft.Data.SqlClient;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -10,12 +11,12 @@ var configuration = builder.Configuration;
 
 builder.Services.AddAuthentication().AddGoogle(googleOptions =>
 {
-    googleOptions.ClientId = configuration["GoogleClientId"];
-    googleOptions.ClientSecret = configuration["GoogleClientSecret"];
+    googleOptions.ClientId = configuration["Google:ClientId"];
+    googleOptions.ClientSecret = configuration["Google:ClientSecret"];
 });
-// Add services to the container.
+//Add services to the container.
 var identityConnectionString = builder.Configuration.GetConnectionString("DefaultConnection") ??
-                               throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+                               throw new InvalidOperationException("Connection string 'app' not found.");
 builder.Services.AddDbContext<AuroraBricksIdentityDbContext>(options =>
     options.UseSqlite(identityConnectionString));
 
