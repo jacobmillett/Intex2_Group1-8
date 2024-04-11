@@ -1,14 +1,107 @@
-@* @model TModel
+@model IEnumerable<AuroraBricks.Models.BrixProduct>
 @{
-    Layout = null;
+    ViewBag.Title = "Product List";
 }
-<!DOCTYPE html>
-<html>
-<head>
-    <title>title</title>
-</head>
-<body>
-    <div>
+
+    <style>
+    body {
+        background: linear-gradient(to bottom, #10004E, #55439E);
+        color: white;
+    }
+
+    .card {
+        margin-bottom: 30px; /* Add margin between cards */
+        transition: box-shadow 0.3s ease; /* Add transition effect to box-shadow property */
+        color: black;
+        card-height: 270px;
+    }
+
+        .card:hover {
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Change box-shadow on hover */
+        }
+
+    </style>
+
+<div class="container col-9">
+    <div class="pb-3">
+        <div class="row">
+            @foreach (BrixProduct p in Model)
+            {
+                <div class="col-md-6 mb-3">
+                    <div class="card">
+                        <div class="card-body d-flex justify-content-between">
+                            <div>
+                                <h3 class="card-title">@p.Name</h3>
+                                <img src="@p.ImgLink" alt="@p.Name" style="max-width: 250px; border-radius: 5px;">
+                            </div>
+                            <div>
+                                <div class="d-flex justify-content-end align-items-center">
+                                    <span class="badge rounded-pill bg-success">$@p.Price</span>
+                                    <button type="button" style="display: inline-block; margin-left: 10px; padding: 10px 20px; background-color: #7fffd5; border: 1px solid black; border-radius: 5px;">
+                                        <a style="text-decoration: none; color: black; font-weight: bold;">Add to Cart</a>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
     </div>
-</body>
-</html> *@
+</div>
+
+
+
+<a asp-controller="Home" asp-action="ProductList" asp-route-pageNum="1">1</a>
+<a asp-controller="Home" asp-action="ProductList" asp-route-pageNum="2">2</a>
+<a asp-controller="Home" asp-action="ProductList" asp-route-pageNum="3">3</a>
+<a asp-controller="Home" asp-action="ProductList" asp-route-pageNum="4">4</a>
+<a asp-controller="Home" asp-action="ProductList" asp-route-pageNum="5">5</a>
+<a asp-controller="Home" asp-action="ProductList" asp-route-pageNum="6">6</a>
+<a asp-controller="Home" asp-action="ProductList" asp-route-pageNum="7">7</a>
+<a asp-controller="Home" asp-action="ProductList" asp-route-pageNum="8">8</a>
+
+@* <form method="get">
+    Category:
+    <select name="category">
+        <option value="">All</option>
+        @foreach (var category in ViewBag.Categories)
+        {
+            <option value="@category" @(ViewBag.Category == category ? "selected" : "")>@category</option>
+        }
+    </select>
+    Color:
+    <select name="primaryColor">
+        <option value="">All</option>
+        @foreach (var color in ViewBag.PrimaryColors)
+        {
+            <option value="@color" @(ViewBag.PrimaryColor == color ? "selected" : "")>@color</option>
+        }
+    </select>
+    <input type="submit" value="Filter" />
+</form>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Primary Color</th>
+        <th>Category</th>
+    </tr>
+    @foreach (var product in Model)
+    {
+        <tr>
+            <td>@product.Name</td>
+            <td>@product.Price</td>
+            <td>@product.PrimaryColor</td>
+            <td>@product.Category</td>
+        </tr>
+    }
+</table>
+
+<div>
+    @for (int i = 1; i <= ViewBag.TotalPages; i++)
+    {
+        <a href="?page=@i&resultsPerPage=@ViewBag.ResultsPerPage&category=@ViewBag.Category&primaryColor=@ViewBag.PrimaryColor">@i</a>
+    }
+</div> *@

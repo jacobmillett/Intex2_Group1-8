@@ -1,10 +1,17 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<style>
+    body {
+        background: linear-gradient(to bottom, #10004E, #55439E);
+        color: white;
+    }
+</style>
 
-<div class="px-0">
-    <img src="~/content/images/ABrix-Logo.webp" alt="A banner image of the logo" class="full-width-image">
+<div class="px-0 text-center">
+    <img src="~/content/images/Logo-Banner.webp" alt="A banner image of the logo" class="full-width-image">
 </div>
+
 
 <div class="divider-bar">Your top picks</div>
 
@@ -40,6 +47,18 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
     </button>
+    <br />
+    <br />
+    <div style="text-align: center;">
+        <button type="button" style="display: inline-block; padding: 10px 20px; background-color: #7fffd5; border: 1px solid black; border-radius: 5px;">
+            <a href="@Url.Action("ProductList", "Home")" style="text-decoration: none; color: black; font-weight: bold;">Go to Product List</a>
+        </button>
+    </div>
+
+
+
+
+
 </div>
 
 @section Scripts {

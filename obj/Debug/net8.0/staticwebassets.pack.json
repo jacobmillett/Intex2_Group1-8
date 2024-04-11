@@ -5,12 +5,12 @@
       "PackagePath": "staticwebassets\\AuroraBricks.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\calebreese\\source\\repos\\Intex2_Group1-8\\wwwroot\\content\\images\\ABrix-Logo.webp",
-      "PackagePath": "staticwebassets\\content\\images\\ABrix-Logo.webp"
-    },
-    {
       "Id": "C:\\Users\\calebreese\\source\\repos\\Intex2_Group1-8\\wwwroot\\content\\images\\Aurora-waving.webp",
       "PackagePath": "staticwebassets\\content\\images\\Aurora-waving.webp"
+    },
+    {
+      "Id": "C:\\Users\\calebreese\\source\\repos\\Intex2_Group1-8\\wwwroot\\content\\images\\Logo-Banner.webp",
+      "PackagePath": "staticwebassets\\content\\images\\Logo-Banner.webp"
     },
     {
       "Id": "C:\\Users\\calebreese\\source\\repos\\Intex2_Group1-8\\wwwroot\\content\\product-images\\Baseplate.jpg",
