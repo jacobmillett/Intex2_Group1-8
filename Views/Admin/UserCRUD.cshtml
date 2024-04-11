@@ -1,18 +1,47 @@
-@* @model TModel *@
-@* *@
-@* @{ *@
-@*     Layout = null; *@
-@* } *@
-@* *@
-@* <!DOCTYPE html> *@
-@* *@
-@* <html> *@
-@* <head> *@
-@*     <title>title</title> *@
-@* </head> *@
-@* <body> *@
-@* <div> *@
-@*        *@
-@* </div> *@
-@* </body> *@
-@* </html> *@
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@model List<BrixCustomer>
+
+<table class="table table-bordered">
+    <thead class="fw-bold">
+    <tr>
+        <td>Customer ID</td>
+        <td>Full Name</td>
+        <td>Age</td>
+        <td>Birth Date</td>
+        <td>Gender</td>
+        <td>Country of Residence</td>
+        <td>Email</td>
+
+    </tr>
+    </thead>
+
+    @foreach (var x in Model)
+    {
+        <tbody>
+        <tr>
+            <td>@x.CustomerId</td>
+            <td>@x.LastName, @x.FirstName</td>
+            <td>@x.Age</td>
+            <td>@x.BirthDate</td>
+            <td>@x.Gender</td>
+            <td>@x.CountryOfResidence</td>
+            <td>@x.Email</td>
+            
+            
+            <td><a class="btn btn-toolbar" asp-controller="Admin" asp-action="EditUser" asp-route-id="@x.CustomerId">Edit</a></td> 
+            <td><a class="btn btn-danger" asp-controller="Admin" asp-action="DeleteUser" asp-route-id ="@x.CustomerId">Delete</a></td> 
+    
+        </tr>
+        </tbody>
+    }
+
+
+
+
+</table>
+
+@section Scripts {
+
+}

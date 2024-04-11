@@ -11,6 +11,13 @@ public interface IBrixRepository
 
 
     void AddCustomer(BrixCustomer customer);
+    void AddProduct(BrixProduct product);
+    void RemoveProduct(BrixProduct product);
+    void EditProduct(BrixProduct product);
 
+    void EditUser(BrixCustomer customer);
+    void RemoveUser(BrixCustomer customer);
     BrixCustomer GetLastCustomer();
+
+    BrixProduct GetLastProduct();
 }
