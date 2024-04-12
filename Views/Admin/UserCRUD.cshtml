@@ -1,6 +1,7 @@
 @{
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+
 @model List<BrixCustomer>
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
@@ -8,72 +9,63 @@
 @inject RoleManager<IdentityRole> RoleManager
 
 <div class="table-container">
-
     <table class="table table-bordered table-striped table-border">
         <thead class="fw-bold">
-        <tr>
-            <td>Customer ID</td>
-            <td>Full Name</td>
-            <td>Age</td>
-            <td>Birth Date</td>
-            <td>Gender</td>
-            <td>Country of Residence</td>
-            <td>Email</td>
-            <td>Role</td>
-
-        </tr>
+            <tr>
+                <td>Customer ID</td>
+                <td>Full Name</td>
+                <td>Age</td>
+                <td>Birth Date</td>
+                <td>Gender</td>
+                <td>Country of Residence</td>
+                <td>Email</td>
+                <td>Role</td>
+                <td>Edit</td>
+                <td>Delete</td>
+            </tr>
         </thead>
-
         @foreach (var x in Model)
         {
             <tbody>
-            <tr>
-                <td>@x.CustomerId</td>
-                <td>@x.LastName, @x.FirstName</td>
-                <td>@x.Age</td>
-                <td>@x.BirthDate</td>
-                <td>@x.Gender</td>
-                <td>@x.CountryOfResidence</td>
-                <td>@x.Email</td>
-                @if (@x.Email != null)
-                {
-                    <td>
-                        @{
-                            var user = await UserManager.FindByEmailAsync(x.Email);
-                            @if (user != null)
-                            {
-                                var roles = await UserManager.GetRolesAsync(user);
-                                <ul>
-                                    @foreach (var role in roles)
-                                    {
-                                        <li>@role</li>
-                                    }
-                                </ul>
+                <tr>
+                    <td>@x.CustomerId</td>
+                    <td>@x.LastName, @x.FirstName</td>
+                    <td>@x.Age</td>
+                    <td>@x.BirthDate</td>
+                    <td>@x.Gender</td>
+                    <td>@x.CountryOfResidence</td>
+                    <td>@x.Email</td>
+                    @if (@x.Email != null)
+                    {
+                        <td>
+                            @{
+                                var user = await UserManager.FindByEmailAsync(x.Email);
+                                if (user != null)
+                                {
+                                    var roles = await UserManager.GetRolesAsync(user);
+                                    <ul>
+                                        @foreach (var role in roles)
+                                        {
+                                            <li>@role</li>
+                                        }
+                                    </ul>
+                                }
+                                    <p>None</p>
+                                
                             }
-                            }
-                    </td>
-                }
-                else
-                {
-                   <td>None</td> 
-                }
-                
-
-
-
-                <td><a class="btn-darkblue" asp-controller="Admin" asp-action="EditUser" asp-route-id="@x.CustomerId">Edit</a><td/> 
-                <td><a class="btn btn-danger" asp-controller="Admin" asp-action="DeleteUser" asp-route-id ="@x.CustomerId">Delete</a><td/> 
-        
-            </tr>
+                        </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+                    <td><a class="btn-darkblue" asp-controller="Admin" asp-action="EditUser" asp-route-id="@x.CustomerId">Edit</a></td>
+                    <td><a class="btn btn-danger" asp-controller="Admin" asp-action="DeleteUser" asp-route-id="@x.CustomerId">Delete</a></td>
+                </tr>
             </tbody>
         }
-
-
-
-
     </table>
 </div>
-
 
 @section Scripts {
 
