@@ -87,11 +87,11 @@ public class EfBrixRepository : IBrixRepository
         return _context.BrixProducts.OrderByDescending(x => x.ProductId).FirstOrDefault();
     }
     
-    public BrixOrder GetLastOrder()
-    {
+    //public BrixOrder GetLastOrder()
+    //{
         
-        return _context.BrixOrders.OrderByDescending(x => x.TransactionId).FirstOrDefault();
-    }
+    //    return _context.BrixOrders.OrderByDescending(x => x.TransactionId).FirstOrDefault();
+    //}
     
     public async Task<BrixCustomer> GetBrixCustomerByEmailAsync(string email)
     {

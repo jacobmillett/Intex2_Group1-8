@@ -211,6 +211,20 @@ public class HomeController : Controller
     }
 
     [HttpPost]
+    public IActionResult AddToCart(int productId, string returnUrl)
+    {
+        var cart = SessionCart.GetCart(HttpContext.RequestServices);
+        var product = _repo.Products.FirstOrDefault(p => p.ProductId == productId);
+
+        if (product != null)
+        {
+            cart.AddItem(product, 1);
+        }
+
+        return RedirectToAction("Cart", new { returnUrl });
+    }
+
+    [HttpPost]
     public IActionResult RemoveFromCart(int productId, string returnUrl)
     {
         var cart = SessionCart.GetCart(HttpContext.RequestServices);
@@ -243,10 +257,6 @@ public class HomeController : Controller
     [HttpGet]
     public IActionResult Checkout()
     {
-        var lastRecord = _repo.GetLastOrder();
-
-        // Calculate the new CustomerId value
-        int newTransactionId = (lastRecord != null) ? lastRecord.TransactionId + 1 : 1;
         var details = new CartViewModel
             { Cart = cart };
         
