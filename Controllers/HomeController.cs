@@ -16,6 +16,7 @@ using Google.Protobuf.WellKnownTypes;
 using Microsoft.ML;
 using Microsoft.ML.Data;
 using AuroraBricks.Models.ViewModels;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 
 namespace AuroraBricks.Controllers;
@@ -130,28 +131,70 @@ public class HomeController : Controller
       
     }
 
-    public IActionResult ProductList(int pageNum, int pageSize = 5)
+    public ActionResult ProductList(string Category, string PrimaryColor, int pageNum = 1, int pageSize = 5)
     {
-        // Prepare the base query to be filtered
-        var baseQuery = _repo.Products.AsQueryable();
+        var query = _repo.Products.AsQueryable();
 
-        var viewModel = new ProductsListViewModel
+        // Apply filtering based on category and primary color
+        if (!string.IsNullOrEmpty(Category))
         {
-            Product = baseQuery
-                .OrderBy(x => x.Name)
-                .Skip((pageNum - 1) * pageSize)
-                .Take(pageSize)
-                .ToList(),
+            query = query.Where(p => p.Category.Equals(Category, StringComparison.OrdinalIgnoreCase));
+        }
+        if (!string.IsNullOrEmpty(PrimaryColor))
+        {
+            query = query.Where(p => p.PrimaryColor.Equals(PrimaryColor, StringComparison.OrdinalIgnoreCase));
+        }
 
+        // Pagination calculations
+        int totalItems = query.Count();
+        var products = query
+            .OrderBy(x => x.Name)
+            .Skip((pageNum - 1) * pageSize)
+            .Take(pageSize)
+            .ToList();
+
+        var model = new ProductsListViewModel
+        {
+            Products = products,
+            Categories = new SelectList(_repo.Products.Select(p => p.Category).Distinct().OrderBy(c => c)),
+            PrimaryColors = new SelectList(_repo.Products.Select(p => p.PrimaryColor).Distinct().OrderBy(c => c)),
+            SelectedCategory = Category,
+            SelectedPrimaryColor = PrimaryColor,
             PaginationInfo = new PaginationInfo
             {
                 CurrentPage = pageNum,
                 ItemsPerPage = pageSize,
-                TotalItems = _repo.Products.Count()
+                TotalItems = totalItems
             }
         };
-        return View(viewModel);
+
+        return View(model);
     }
+
+
+
+    //public IActionResult ProductList(int pageNum, int pageSize = 5)
+    //{
+    //    // Prepare the base query to be filtered
+    //    var baseQuery = _repo.Products.AsQueryable();
+
+    //    var viewModel = new ProductsListViewModel
+    //    {
+    //        Product = baseQuery
+    //            .OrderBy(x => x.Name)
+    //            .Skip((pageNum - 1) * pageSize)
+    //            .Take(pageSize)
+    //            .ToList(),
+
+    //        PaginationInfo = new PaginationInfo
+    //        {
+    //            CurrentPage = pageNum,
+    //            ItemsPerPage = pageSize,
+    //            TotalItems = _repo.Products.Count()
+    //        }
+    //    };
+    //    return View(viewModel);
+    //}
 
 
 
