@@ -41,13 +41,24 @@ public class HomeController : Controller
 
         if (_environment.IsDevelopment())
         {
-        
+
             modelPath = Path.Combine(_environment.ContentRootPath, "fraudModel.onnx");
         }
         else
         {
 
             modelPath = Path.Combine(_environment.ContentRootPath, "wwwroot", "fraudModel.onnx");
+            modelPath = "AuroraBricks/fraudModel.onnx";
+            if (System.IO.File.Exists(modelPath))
+            {
+                _session = new InferenceSession(modelPath);
+            }
+            else
+            {
+                // Handle the case where the file does not exist
+                // For example, you can log an error or throw an exception
+                throw new FileNotFoundException("Model file not found", modelPath);
+            }
         }
         _session = new InferenceSession(modelPath);
     }

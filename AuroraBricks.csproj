@@ -8,6 +8,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Content Remove="wwwroot\fraudModel.onnx" />
+    </ItemGroup>
+
+    <ItemGroup>
         <None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
     </ItemGroup>
 
@@ -36,6 +40,11 @@
 
     <ItemGroup>
 		<Folder Include="wwwroot\lib\qrcode\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="wwwroot\fraudModel.onnx" />
+      <None Include="wwwroot\wwwroot\fraudModel.onnx" />
     </ItemGroup>
 
 </Project>
