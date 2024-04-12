@@ -20,9 +20,9 @@ html {
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
-    padding 0;
+    padding: 0;
     width: 100%;
-    height 100%;
+    height: 100%;
     margin-bottom: 60px;
 }
 
@@ -110,12 +110,20 @@ img {
 }
 
 .addToCart-btn {
-    position: relative; /* To ensure the button is positioned correctly within .product-action */
-    background-color: aquamarine;
+    background-color: #01bf74;
     border-radius: 10px;
     padding: 10px 100px;
 }
 
+.price-text {
+    display: flex;
+    justify-content: center;
+    position: absolute; 
+    bottom: 0; 
+    left: 0; 
+    color: white; 
+    background-color: green;
+}
 .btn-darkblue {
     border-radius: 3px;
     background-color: #4D47A3;
@@ -141,4 +149,32 @@ img {
 .formpadding {
     padding-left: 15%;
     padding-right: 15%;
+}
+
+.table-border {
+    border: 2px solid black; /* Set border thickness and color to match table background */
+}
+
+.table-container {
+    width: 70%; /* Set the width of the table container */
+    margin: 0 auto; /* Center the table horizontally */
+}
+/* Apply white background to even rows */
+/* Apply white background to even rows */
+
+
+.description-cell {
+    max-width: 300px; /* Set the maximum width for description cells */
+    overflow: hidden; /* Hide any overflow content */
+    text-overflow: ellipsis; /* Display ellipsis (...) for overflow text */
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+.paddingleft{
+    padding-left: 10%;
+}
+
+.paddingtopbottom{
+    padding-top: 10%;
+    padding-bottom: 10%;
 }

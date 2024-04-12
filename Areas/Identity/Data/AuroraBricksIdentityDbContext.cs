@@ -10,6 +10,7 @@ public class AuroraBricksIdentityDbContext : IdentityDbContext<IdentityUser>
         : base(options)
     {
     }
+    
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

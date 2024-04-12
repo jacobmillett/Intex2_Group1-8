@@ -1,7 +1,7 @@
-@model IEnumerable<AuroraBricks.Models.BrixProduct>
 @{
-    ViewBag.Title = "Product List";
+    ViewBag.Title = "Products Catalog";
 }
+@model ProductsListViewModel
 
 <style>
     body {
@@ -20,17 +20,18 @@
         justify-content: space-between; /* Distribute space between elements */
     }
 
-    .card:hover {
-        box-shadow: 0 0 30px rgba(0, 0, 0, 0.5); /* Change box-shadow on hover */
-    }
+        .card:hover {
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5); /* Change box-shadow on hover */
+        }
 
     .card-header {
-        text-align: center; /* Center the title */
+        text-align: center;
+        background-color: transparent;
     }
 
     .card-body {
         display: flex; /* Use flexbox for body layout */
-        justify-content: space-between; /* Align image and price/button on opposite ends */
+        justify-content: space-around; /* Align image and price/button on opposite ends */
         align-items: flex-end; /* Align items to the bottom */
     }
 
@@ -43,13 +44,14 @@
 
     h1 {
         text-align: center; /* Centers the title text */
-        margin-top: 10px; /* Margin from the top*/
         margin-bottom: 20px; /* Adds some space below the title */
+        background-color: #01bf74;
+        margin-bottom: 30px;
     }
 
     .price-tag {
-        margin-bottom: 25px; /* Add space between price and button */
-        font-size: 30px; /* Set the font size to 20px */
+        margin-bottom: 20px; /* Add space between price and button */
+        font-size: 25px; /* Set the font size to 20px */
         font-weight: bold; /* Make the font weight bold */
     }
 
@@ -58,57 +60,118 @@
         font-weight: bold;
     }
 
-    .pagination-container {
-        display: flex;
-        justify-content: center;
-        margin-top: 20px;
+    .container .pagination-container.left-margin {
+        margin-left: 30px;
+        background-color: grey;
+        width: auto;
+        display: inline-block; 
     }
 
-    .pagination-link {
-        display: inline-block;
-        font-size: 20px;
-        padding: 5px 10px;
-        margin: 0 5px;
-        border: 1px solid black;
-        border-radius: 3px;
-        color: #10004E;
-        background-color: #7fffd5;
-        text-decoration: none;
+    .filter-row {
+        display: flex; /* Enables flexbox layout */
+        justify-content: space-around; /* Distributes space evenly around items */
+        margin-bottom: 20px; /* Adds space below the row */
+        padding: 10px 0; /* Padding for better visual appearance */
     }
 
-    .pagination-link:hover {
-        background-color: #5fecd2;
+    select {
+        width: 150px; /* Ensures all dropdowns are the same width */
     }
 
 </style>
 
-<h1 style="">@ViewBag.Title</h1>
+<div class="px-0 text-center">
+    <img src="~/content/images/Logo-Banner.webp" alt="A banner image of the logo" style="width: 400px; display: block; margin: auto;">
+</div>
 
-<div class="container col-9">
+<div>
+    <h1 style="">@ViewBag.Title</h1>
+</div>
+<div>
+</div>
+
+@* <div class="container">
+    <form method="get" action="@Url.Action("ProductList", "Home")">
+        <label for="pageSize">Results per page:</label>
+        <select name="pageSize" onchange="this.form.submit()">
+            <option value="5" current>5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+        </select>
+        <input type="hidden" name="pageNum" value="@Model.PaginationInfo.CurrentPage" />
+    </form>
+   
+</div> *@
+
+
+
+
+<div class="container" style="justify-content: space-between;">
+    @using (Html.BeginForm("ProductList", "Home", FormMethod.Get))
+    {
+        <div class="filter-row">
+            <div>
+                <label for="category">Category:</label>
+                @Html.DropDownListFor(m => m.SelectedCategory, Model.Categories, "Select Category", new { onchange = "this.form.submit();", @class = "form-control" })
+            </div>
+            <div>
+                <label for="primaryColor">Primary Color:</label>
+                @Html.DropDownListFor(m => m.SelectedPrimaryColor, Model.PrimaryColors, "Select Color", new { onchange = "this.form.submit();", @class = "form-control" })
+            </div>
+            <div>
+                <label for="pageSize">Results per page:</label>
+                <select name="pageSize" onchange="this.form.submit()" class="form-control">
+                    <option value="5" current>5</option>
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                </select>
+                <input type="hidden" name="pageNum" value="@Model.PaginationInfo.CurrentPage" />
+            </div>
+        </div>
+    }
+</div>
+
+
+
+
+
+
+<div class="container">
     <div class="pb-3">
+        <!-- Start a new row for your products -->
         <div class="row">
-            @foreach (BrixProduct p in Model)
+            @foreach (BrixProduct p in Model.Products)
             {
+                <!-- Each product takes up 6 columns in medium to large screens, making it 2 products per row -->
                 <div class="col-md-6 mb-3">
                     <div class="card">
                         <div class="card-header">
                             <h5 class="card-title">@p.Name</h5>
                         </div>
                         <div class="card-body">
-                            <div style="width: 200px; height: 200px; overflow: hidden; border-radius: 5px;">
-                                <img src="@p.ImgLink" alt="@p.Name" style="width: 100%; height: 100%; object-fit: cover; border: 2px solid bla">
-                            </div>
+                            <a href="@Url.Action("ProductDetail", "Home", new { ProductId = p.ProductId })" style="text-decoration: none; color: inherit;">
+                                <div style="width: 200px; height: 200px; overflow: hidden; border-radius: 5px;">
+                                    <img src="@p.ImgLink" alt="@p.Name" style="width: 100%; height: 100%; object-fit: cover; border: 2px solid black;">
+                                </div>
+                            </a>
                             <div class="price-button-container">
                                 <span class="price-tag">@($"${p.Price:F2}")</span>
-                                <button type="button" style="padding: 10px 30px; background-color: #FFD700; border: 1px solid black; border-radius: 5px;">
-                                    <a style="text-decoration: none; color: white; font-size: 30; font-weight: bold;">Add to Cart</a>
-                                </button>
+                                <form asp-action="AddToCart" method="post">
+                                    <input type="hidden" name="productId" value="@p.ProductId" />
+                                    <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.Path" />
+                                    <button type="submit" class="btn btn-primary">Add to Cart</button>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             }
         </div>
+
+    </div>
+    <div class="pagination-container left-margin">
+        <div page-model="@Model.PaginationInfo" page-action="ProductList" page-classes-enabled="true" page-class="btn"
+             page-class-normal="btn-outline-dark" page-class-selected="btn-secondary" class="btn-group ml-2"></div>
     </div>
 </div>
 
@@ -117,59 +180,8 @@
 
 
 
-<div class="pagination-container">
-    <a asp-controller="Home" asp-action="ProductList" asp-route-pageNum="1" class="pagination-link">1</a>
-    <a asp-controller="Home" asp-action="ProductList" asp-route-pageNum="2" class="pagination-link">2</a>
-    <a asp-controller="Home" asp-action="ProductList" asp-route-pageNum="3" class="pagination-link">3</a>
-    <a asp-controller="Home" asp-action="ProductList" asp-route-pageNum="4" class="pagination-link">4</a>
-    <a asp-controller="Home" asp-action="ProductList" asp-route-pageNum="5" class="pagination-link">5</a>
-    <a asp-controller="Home" asp-action="ProductList" asp-route-pageNum="6" class="pagination-link">6</a>
-    <a asp-controller="Home" asp-action="ProductList" asp-route-pageNum="7" class="pagination-link">7</a>
-    <a asp-controller="Home" asp-action="ProductList" asp-route-pageNum="8" class="pagination-link">8</a>
-</div>
 
 
-@* <form method="get">
-    Category:
-    <select name="category">
-        <option value="">All</option>
-        @foreach (var category in ViewBag.Categories)
-        {
-            <option value="@category" @(ViewBag.Category == category ? "selected" : "")>@category</option>
-        }
-    </select>
-    Color:
-    <select name="primaryColor">
-        <option value="">All</option>
-        @foreach (var color in ViewBag.PrimaryColors)
-        {
-            <option value="@color" @(ViewBag.PrimaryColor == color ? "selected" : "")>@color</option>
-        }
-    </select>
-    <input type="submit" value="Filter" />
-</form>
 
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Primary Color</th>
-        <th>Category</th>
-    </tr>
-    @foreach (var product in Model)
-    {
-        <tr>
-            <td>@product.Name</td>
-            <td>@product.Price</td>
-            <td>@product.PrimaryColor</td>
-            <td>@product.Category</td>
-        </tr>
-    }
-</table>
+<br />
 
-<div>
-    @for (int i = 1; i <= ViewBag.TotalPages; i++)
-    {
-        <a href="?page=@i&resultsPerPage=@ViewBag.ResultsPerPage&category=@ViewBag.Category&primaryColor=@ViewBag.PrimaryColor">@i</a>
-    }
-</div> *@

@@ -7,39 +7,56 @@
 
 <div class="text-center">
     <h2>Add a new product, fill out the form below:</h2>
-    <form method= "post">
+    <form method= "post" class="formpadding">
+        <div class="formpadding">
+                <input type = "hidden" asp-for="ProductId" />
+                <div class="form-floating mb-3">        
+                    <input asp-for="Name" class="form-control"/>
+                    <label asp-for="Name">Product Name:</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Year" class="form-control"/>
+                    <label asp-for="Year">Product Year:</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="NumParts" class="form-control"/>
+                    <label asp-for="NumParts">Number of parts:</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="NumParts" class="form-control"/>
+                    <label asp-for="NumParts">Number of parts:</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Price" class="form-control"/>
+                    <label asp-for="Price">Product Price:</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="ImgLink" class="form-control"/>
+                    <label asp-for="ImgLink">What is the link to this products image:</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="PrimaryColor" class="form-control"/>
+                    <label asp-for="PrimaryColor">Product's Primary Color:</label>
         
-        <input type = "hidden" asp-for="ProductId" />
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="SecondaryColor" class="form-control"/>
+                    <label asp-for="SecondaryColor">Product's Secondary Color:</label>
+        
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Description" class="form-control"/>
+                    <label asp-for="Description">Product Description:</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Category" class="form-control">
+                    <label asp-for="Category">Product Category:</label>
+        
+                </div>
+           
+                <button type="submit" class="btn-darkblue">Submit</button>
+        </div>
 
-        <label asp-for="Name">Product Name:</label>
-        <input asp-for="Name"/>
-        <br />
-        <label asp-for="Year">Product Year:</label>
-        <input asp-for="Year"/>
-        <br />
-        <label asp-for="NumParts">Number of parts:</label>
-        <input asp-for="NumParts"/>
-        <br />
-        <label asp-for="Price">Product Price:</label>
-        <input asp-for="Price"/>
-        <br />
-        <label asp-for="ImgLink">What is the link to this products image:</label>
-        <input asp-for="ImgLink"/>
-        <br />
-        <label asp-for="PrimaryColor">Product's Primary Color:</label>
-        <input asp-for="PrimaryColor"/>
-        <br />
-        <label asp-for="SecondaryColor">Product's Secondary Color:</label>
-        <input asp-for="SecondaryColor"/>
-        <br /> 
-        
-        <label asp-for="Description">Product Description:</label>
-        <input asp-for="Description"/>
-        <br />
-        <label asp-for="Category">Product Category:</label>
-        <input asp-for="Category">
-        <br />
-        <button type="submit">Submit</button>
     </form>
     <br />
 

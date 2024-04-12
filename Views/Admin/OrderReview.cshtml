@@ -10,36 +10,48 @@
     };
 }
 @model List<BrixOrder>
-
-<table class="table table-bordered">
-    <thead class="fw-bold">
-    <tr>
-        <td>Transaction Id</td>
-        <td>Date</td>
-        <td>Time</td>
-        <td>Country of Transaction</td>
-        <td>Fraud</td>
-    </tr>
-    </thead>
-
-    @foreach (var x in Model)
-    {
-        <tbody>
+<div class="table-container">
+    <table class="table table-bordered table-striped table-border">
+        <thead class="fw-bold">
         <tr>
-            <td>@x.TransactionId</td>
-            <td>@x.Date</td>
-            <td>@x.Time</td>
-            <td>@x.CountryOfTransaction</td>
-            <td>@x.Fraud</td>
-    
+            <td>Transaction Id</td>
+            <td>Date</td>
+            <td>Time</td>
+            <td>Amount</td>
+            <td>Country of Transaction</td>
+            <td>Shipping Address</td>
+            <td>Fraud</td>
         </tr>
-        </tbody>
-    }
+        </thead>
+    
+        @foreach (var x in Model)
+        {
+            <tbody>
+            <tr>
+                <td>@x.TransactionId</td>
+                <td>@x.Date</td>
+                <td>@x.Time</td>
+                <td>@x.Amount</td>
+                <td>@x.CountryOfTransaction</td>
+                <td>@x.ShippingAddress</td>
+                <td>@x.Fraud</td>
+            </tr>
+            </tbody>
+        }
+    
+    
+    
+    
+    </table>
+</div>
 
 
+<ItemGroup>
+    <None Include="fraudModel.onnx">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+</ItemGroup>
 
-
-</table>
 
 @section Scripts {
 

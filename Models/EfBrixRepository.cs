@@ -16,6 +16,8 @@ public class EfBrixRepository : IBrixRepository
     public IEnumerable<BrixOrder> Orders => _context.BrixOrders.ToList();
     public IEnumerable<BrixProduct> Products => _context.BrixProducts.ToList();
     public IEnumerable<BrixLineItem> LineItems => _context.BrixLineItems.ToList();
+    public IEnumerable<ProductRecommendation> ProductRecommendations => _context.ProductRecommendations.ToList();
+    public IEnumerable<UserRecommendation> UserRecommendations => _context.UserRecommendations.ToList();
 
     public void AddCustomer(BrixCustomer customer)
     {
@@ -28,10 +30,32 @@ public class EfBrixRepository : IBrixRepository
         _context.Add(product);
         _context.SaveChanges();
     }
+    public void AddOrder(BrixOrder order)
+    {
+        _context.Add(order);
+        _context.SaveChanges();
+    }
+    public void AddLineItem(BrixLineItem lineItem)
+    {
+        _context.Add(lineItem);
+        _context.SaveChanges();
+    }
 
     public void EditProduct(BrixProduct product)
     {
         _context.BrixProducts.Update(product);
+        _context.SaveChanges();
+    }
+
+    public void EditOrder(BrixOrder order)
+    {
+        _context.BrixOrders.Update(order);
+        _context.SaveChanges();
+    }
+
+    public void RemoveOrder(BrixOrder order)
+    {
+        _context.BrixOrders.Remove(order);
         _context.SaveChanges();
     }
 
@@ -62,9 +86,41 @@ public class EfBrixRepository : IBrixRepository
         
         return _context.BrixProducts.OrderByDescending(x => x.ProductId).FirstOrDefault();
     }
+    
+    public BrixOrder GetLastOrder()
+    {
+        
+        return _context.BrixOrders.OrderByDescending(x => x.TransactionId).FirstOrDefault();
+    }
+    
     public async Task<BrixCustomer> GetBrixCustomerByEmailAsync(string email)
     {
         return await _context.BrixCustomers.FirstOrDefaultAsync(c => c.Email == email);
     }
+    public async Task<UserRecommendation> GetCustomerRecommendationByCustomerIdAsync(int id)
+    {
+        return await _context.UserRecommendations.FirstOrDefaultAsync(c => c.CustomerId == id);
+    }
+    public async Task<BrixProduct> GetRecommendation1Async(string name)
+    {
+        return await _context.BrixProducts.FirstOrDefaultAsync(c => c.Name == name);
+    }
+    public async Task<BrixProduct> GetRecommendation2Async(string name)
+    {
+        return await _context.BrixProducts.FirstOrDefaultAsync(c => c.Name == name);
+    }
+    public async Task<BrixProduct> GetRecommendation3Async(string name)
+    {
+        return await _context.BrixProducts.FirstOrDefaultAsync(c => c.Name == name);
+    }
+    public async Task<BrixProduct> GetRecommendation4Async(string name)
+    {
+        return await _context.BrixProducts.FirstOrDefaultAsync(c => c.Name == name);
+    }
+    public async Task<BrixProduct> GetRecommendation5Async(string name)
+    {
+        return await _context.BrixProducts.FirstOrDefaultAsync(c => c.Name == name);
+    }
+    
 }
 

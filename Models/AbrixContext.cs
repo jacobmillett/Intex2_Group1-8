@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Identity;
 
 namespace AuroraBricks.Models;
 
 public partial class AbrixContext : DbContext
 {
     private readonly IConfiguration _configuration;
+    //private readonly IConfiguration _configuration;
     public AbrixContext()
     {
     }
@@ -26,17 +26,34 @@ public partial class AbrixContext : DbContext
     public virtual DbSet<BrixOrder> BrixOrders { get; set; }
 
     public virtual DbSet<BrixProduct> BrixProducts { get; set; }
+    
+    public virtual DbSet<ProductRecommendation> ProductRecommendations { get; set; }
+    public virtual DbSet<UserRecommendation> UserRecommendations { get; set; }
+
+    // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    // {
+    //     // Retrieve connection string from configuration
+    //     string connectionString = _configuration.GetConnectionString("ConnectionStrings:ABrixConnection");
+    //
+    //     // Use the retrieved connection string for SQL Server
+    //     optionsBuilder.UseSqlServer(connectionString);
+    // }
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+//        => optionsBuilder.UseSqlServer("SQLCONNSTR_ABrixConnection");
+
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        // Retrieve connection string from configuration
-        string connectionString = _configuration.GetConnectionString("ABrixConnection");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https: //go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        if (!optionsBuilder.IsConfigured)
+        {
+            // Retrieve connection string from configuration
+            string connectionString = _configuration.GetConnectionString("ABrixConnection");
 
-        // Use the retrieved connection string for SQL Server
-        optionsBuilder.UseSqlServer(connectionString);
+            // Use the retrieved connection string for SQL Server
+            optionsBuilder.UseSqlServer(connectionString);
+        }
     }
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-//        => optionsBuilder.UseSqlServer("SQLCONNSTR_ABrixConnection");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -82,6 +99,7 @@ public partial class AbrixContext : DbContext
             entity.Property(e => e.DayOfWeek).HasColumnName("day_of_week");
             entity.Property(e => e.EntryMode).HasColumnName("entry_mode");
             entity.Property(e => e.Fraud).HasColumnName("fraud");
+            entity.Property(e => e.FlagFraud).HasColumnName("FlagFraud");
             entity.Property(e => e.ShippingAddress).HasColumnName("shipping_address");
             entity.Property(e => e.Time).HasColumnName("time");
             entity.Property(e => e.TypeOfCard).HasColumnName("type_of_card");
