@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using AuroraBricks.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
+using AuroraBricks.Models.ViewModels;
 
 namespace AuroraBricks.Controllers;
 
@@ -28,47 +29,29 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult ProductList(int pageNum, string category, string primaryColor)
+    public IActionResult ProductList(int pageNum, int pageSize = 5)
     {
-        int pageSize = 5;
-
         // Prepare the base query to be filtered
         var baseQuery = _context.BrixProducts.AsQueryable();
 
-        // Apply filters
-        if (!string.IsNullOrEmpty(category))
+        var viewModel = new ProductsListViewModel
         {
-            baseQuery = baseQuery.Where(p => p.Category == category);
-        }
-        if (!string.IsNullOrEmpty(primaryColor))
-        {
-            baseQuery = baseQuery.Where(p => p.PrimaryColor == primaryColor);
-        }
+            Product = baseQuery
+                .OrderBy(x => x.Name)
+                .Skip((pageNum - 1) * pageSize)
+                .Take(pageSize)
+                .ToList(),
 
-        // First, count all items for pagination (before paging the items)
-        var totalCount = baseQuery.Count();
-
-        // Retrieve the current page of filtered products
-        var products = baseQuery
-            .OrderBy(x => x.Name)
-            .Skip((pageNum - 1) * pageSize)
-            .Take(pageSize)
-            .ToList();
-
-        // Prepare categories and primary colors for dropdowns, ideally cached if called frequently
-        ViewBag.Categories = _context.BrixProducts.Select(p => p.Category).Distinct().ToList();
-        ViewBag.PrimaryColors = _context.BrixProducts.Select(p => p.PrimaryColor).Distinct().ToList();
-
-        // Pass current filter values back to the view to repopulate the form
-        ViewBag.Category = category;
-        ViewBag.PrimaryColor = primaryColor;
-
-        // Prepare pagination data
-        ViewBag.TotalPages = (int)Math.Ceiling((double)totalCount / pageSize);
-        ViewBag.CurrentPage = pageNum;
-
-        return View(products);
+            PaginationInfo = new PaginationInfo
+            {
+                CurrentPage = pageNum,
+                ItemsPerPage = pageSize,
+                TotalItems = _context.BrixProducts.Count()
+            }
+        };
+        return View(viewModel);
     }
+
 
 
 
