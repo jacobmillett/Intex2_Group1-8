@@ -23,9 +23,30 @@ public class HomeController : Controller
         _repo = temp;
     }
 
-    public IActionResult Index()
+    [HttpGet]
+    public async Task<IActionResult> Index()
     {
-        return View();
+        var userEmail = _userManager.GetUserAsync(User).Result?.Email;
+        var customer = await _repo.GetBrixCustomerByEmailAsync(userEmail);
+
+        if (customer != null)
+        {
+            var userRecommendations = await _repo.GetCustomerRecommendationByCustomerIdAsync(customer.CustomerId);
+            
+            var product1 = await _repo.GetRecommendation1Async(userRecommendations.Recommendation1);
+            var product2 = await _repo.GetRecommendation2Async(userRecommendations.Recommendation2);
+            var product3 = await _repo.GetRecommendation3Async(userRecommendations.Recommendation3);
+            var product4 = await _repo.GetRecommendation4Async(userRecommendations.Recommendation4);
+            var product5 = await _repo.GetRecommendation5Async(userRecommendations.Recommendation5);
+            
+            var productInfo = new List<BrixProduct> { product1, product2, product3, product4, product5 };
+            
+            return View(productInfo);
+        }
+        else
+        {
+            return View();
+        }
     }
     
     [HttpGet]
@@ -139,16 +160,6 @@ public class HomeController : Controller
         return View(customer);
     }
 
-
-
-
-
-
-
-
-    
-    
-
     //
     //
     public IActionResult Cart(string returnUrl)
@@ -197,4 +208,5 @@ public class HomeController : Controller
     {
         return RedirectToAction("Cart");
     }
+    
 }
