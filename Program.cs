@@ -59,11 +59,11 @@ internal class Program
         });
         
         builder.Services.AddDbContext<AuroraBricksIdentityDbContext>(options =>
-            options.UseSqlite(identityConnectionString));
+            options.UseSqlServer(identityConnectionString));
 
 
         builder.Services.AddDbContext<AbrixContext>(options =>
-            options.UseSqlite(generalConnectionString));
+            options.UseSqlServer(generalConnectionString));
 
         builder.Services.AddScoped<IBrixRepository, EfBrixRepository>();
 

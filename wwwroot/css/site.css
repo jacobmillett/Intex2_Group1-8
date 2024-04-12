@@ -110,12 +110,15 @@ img {
 }
 
 .addToCart-btn {
-    position: relative; /* To ensure the button is positioned correctly within .product-action */
-    background-color: aquamarine;
+    background-color: #01bf74;
     border-radius: 10px;
     padding: 10px 100px;
 }
 
+.price-text {
+    display: flex;
+    justify-content: left;
+}
 .btn-darkblue {
     border-radius: 3px;
     background-color: #4D47A3;

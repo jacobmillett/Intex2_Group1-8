@@ -15,7 +15,7 @@ using AuroraBricks.Views.Home;
 using Google.Protobuf.WellKnownTypes;
 using Microsoft.ML;
 using Microsoft.ML.Data;
-
+using AuroraBricks.Models.ViewModels;
 
 
 namespace AuroraBricks.Controllers;
@@ -52,9 +52,30 @@ public class HomeController : Controller
     }
     
 
-    public IActionResult Index()
+    [HttpGet]
+    public async Task<IActionResult> Index()
     {
-        return View();
+        var userEmail = _userManager.GetUserAsync(User).Result?.Email;
+        var customer = await _repo.GetBrixCustomerByEmailAsync(userEmail);
+
+        if (customer != null)
+        {
+            var userRecommendations = await _repo.GetCustomerRecommendationByCustomerIdAsync(customer.CustomerId);
+            
+            var product1 = await _repo.GetRecommendation1Async(userRecommendations.Recommendation1);
+            var product2 = await _repo.GetRecommendation2Async(userRecommendations.Recommendation2);
+            var product3 = await _repo.GetRecommendation3Async(userRecommendations.Recommendation3);
+            var product4 = await _repo.GetRecommendation4Async(userRecommendations.Recommendation4);
+            var product5 = await _repo.GetRecommendation5Async(userRecommendations.Recommendation5);
+            
+            var productInfo = new List<BrixProduct> { product1, product2, product3, product4, product5 };
+            
+            return View(productInfo);
+        }
+        else
+        {
+            return View();
+        }
     }
     
     [HttpGet]
@@ -78,34 +99,30 @@ public class HomeController : Controller
         return Redirect("~/Identity/Account/Register");
       
     }
-        
-    public IActionResult ProductList(int pageNum, string category, string primaryColor)
+
+    public IActionResult ProductList(int pageNum, int pageSize = 5)
     {
-        int pageSize = 5;
-        var query = _repo.Products
-            .OrderBy(x => x.Name)
-            .Skip((pageNum - 1) * pageSize)
-            .Take(pageSize);
+        // Prepare the base query to be filtered
+        var baseQuery = _repo.Products.AsQueryable();
 
-        if (!string.IsNullOrEmpty(category))
+        var viewModel = new ProductsListViewModel
         {
-            query = query.Where(p => p.Category == category);
-        }
+            Product = baseQuery
+                .OrderBy(x => x.Name)
+                .Skip((pageNum - 1) * pageSize)
+                .Take(pageSize)
+                .ToList(),
 
-        if (!string.IsNullOrEmpty(primaryColor))
-        {
-            query = query.Where(p => p.PrimaryColor == primaryColor);
-        }
-
-        var products = query.OrderBy(p => p.ProductId).ToList();
-
-        ViewBag.Category = category;
-        ViewBag.PrimaryColor = primaryColor;
-        ViewBag.Categories = _repo.Products.Select(p => p.Category).Distinct();
-        ViewBag.PrimaryColors = _repo.Products.Select(p => p.PrimaryColor).Distinct();
-
-        return View(products);
+            PaginationInfo = new PaginationInfo
+            {
+                CurrentPage = pageNum,
+                ItemsPerPage = pageSize,
+                TotalItems = _context.BrixProducts.Count()
+            }
+        };
+        return View(viewModel);
     }
+
 
 
 
@@ -148,16 +165,6 @@ public class HomeController : Controller
 
         return View(customer);
     }
-
-
-
-
-
-
-
-
-    
-    
 
     //
     //
@@ -203,12 +210,6 @@ public class HomeController : Controller
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 
-
-
-
-    
-
-
     [HttpGet]
     public IActionResult Checkout()
     {
@@ -252,7 +253,7 @@ public class HomeController : Controller
                         details.Order.CustomerId,
                         (float)details.Order.Time,
 				        (float)(details.Order.Amount),
- 
+
 				        //fix date
 				        //daysSinceJan2022,
 
@@ -277,9 +278,7 @@ public class HomeController : Controller
             //             order.CountryOfTransaction == "China" ? 1 : 0,
 
 				        //use countryoftransaction if shipping address is null
-                        
-                        (details.Order.ShippingAddress ?? details.Order.CountryOfTransaction) == "United Kingdom" ? 1 : 0,
-                        
+                        (details.Order.ShippingAddress ?? details.Order.CountryOfTransaction) == "United Kingdom" ? 1 : 0
                         //
                         // order.Bank == "HSBC" ? 1 : 0,
                         // order.Bank == "Halifax" ? 1 : 0,

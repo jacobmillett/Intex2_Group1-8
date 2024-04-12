@@ -6,6 +6,8 @@ namespace AuroraBricks.Models;
 
 public partial class AbrixContext : DbContext
 {
+    
+    //private readonly IConfiguration _configuration;
     public AbrixContext()
     {
     }
@@ -22,11 +24,25 @@ public partial class AbrixContext : DbContext
     public virtual DbSet<BrixOrder> BrixOrders { get; set; }
 
     public virtual DbSet<BrixProduct> BrixProducts { get; set; }
+    
+    public virtual DbSet<ProductRecommendation> ProductRecommendations { get; set; }
+    public virtual DbSet<UserRecommendation> UserRecommendations { get; set; }
+
+    // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    // {
+    //     // Retrieve connection string from configuration
+    //     string connectionString = _configuration.GetConnectionString("ConnectionStrings:ABrixConnection");
+    //
+    //     // Use the retrieved connection string for SQL Server
+    //     optionsBuilder.UseSqlServer(connectionString);
+    // }
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+//        => optionsBuilder.UseSqlServer("SQLCONNSTR_ABrixConnection");
+
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlite("Data Source = Abrix.db");
-
+        => optionsBuilder.UseSqlServer("ConnectionStrings:AbrixConnection");
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<BrixCustomer>(entity =>
