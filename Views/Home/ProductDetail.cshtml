@@ -46,13 +46,17 @@
                         <img src="@Model.ImgLink" alt="@Model.Name" style="padding: 20px 10px; width: 100%; height: auto; border-radius: 5px; margin-bottom: 15px;">
                         <!-- Button container with flex layout for horizontal alignment -->
                         <div style="display: flex; justify-content: center; width: 100%;">
-                            <!-- First button with adjusted margin for spacing between buttons -->
-                            <button type="button" style="padding: 5px 10px; background-color: #01bf74; border: 1px solid black; border-radius: 10px; margin-right: 30px;">
-                                <a style="text-decoration: none; color: white; font-size: 18px; font-weight: bold;">Add to Cart</a>
-                            </button>
-                            <!-- Second button without additional right margin -->
-                            <button type="button" style="padding: 5px 10px; background-color: #01bf74; border: 1px solid black; border-radius: 10px; margin-left: 30px;">
-                                <a href="@Url.Action("ProductList", "Home")" style="text-decoration: none; color: white; font-size: 18px; font-weight: bold;">Cancel</a>
+                            <!-- Add to Cart Form -->
+                            <form method="post" action="@Url.Action("AddToCart", "Cart")">
+                                <input type="hidden" name="productId" value="@Model.ProductId" />
+                                <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.Path" />
+                                <button type="submit" class="btn btn-primary" style="padding: 5px 10px; background-color: #01bf74; border: 1px solid black; border-radius: 10px; margin-right: 30px;">
+                                    Add to Cart
+                                </button>
+                            </form>
+                            <!-- Cancel Button -->
+                            <button type="button" onclick="window.location='@Url.Action("ProductList", "Home")'" style="padding: 5px 10px; background-color: #01bf74; border: 1px solid black; border-radius: 10px; margin-left: 30px;">
+                                <span style="color: white; font-size: 18px; font-weight: bold;">Cancel</span>
                             </button>
                         </div>
                     </div>
@@ -77,3 +81,6 @@
 <a href="@Url.Action("ProductDetail", "Home", new { ProductId = Model.ProductId })">
   
 </a>
+
+
+

@@ -114,9 +114,11 @@
                             </a>
                             <div class="price-button-container">
                                 <span class="price-tag">@($"${p.Price:F2}")</span>
-                                <button type="button" style="padding: 5px 10px; background: linear-gradient(to bottom, #08ce79, #009b68); border: 1px solid black; border-radius: 10px;">
-                                    <a style="text-decoration: none; color: white; font-weight: bold; font-size: 18px">Add to Cart</a>
-                                </button>
+                                <form asp-action="AddToCart" method="post">
+                                    <input type="hidden" name="productId" value="@p.ProductId" />
+                                    <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.Path" />
+                                    <button type="submit" class="btn btn-primary">Add to Cart</button>
+                                </form>
                             </div>
                         </div>
                     </div>
