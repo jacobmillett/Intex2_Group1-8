@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AuroraBricks")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7eb5b49c9f2163750d5256331fd673eca6e35d99")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f050f98ff57a81e3760399b3ef970a0caf69a0cb")]
 [assembly: System.Reflection.AssemblyProductAttribute("AuroraBricks")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AuroraBricks")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
