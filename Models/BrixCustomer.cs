@@ -22,7 +22,7 @@ public partial class BrixCustomer
 
     public string? Gender { get; set; }
 
-    public float? Age { get; set; }
+    public double? Age { get; set; }
 
     public string? Email { get; set; }
 
