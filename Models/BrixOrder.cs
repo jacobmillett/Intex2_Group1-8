@@ -19,7 +19,7 @@ public partial class BrixOrder
 
     public string? EntryMode { get; set; }
 
-    public double? Amount { get; set; }
+    public float? Amount { get; set; }
 
     public string? TypeOfTransaction { get; set; }
 

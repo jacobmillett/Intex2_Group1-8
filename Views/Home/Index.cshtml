@@ -20,101 +20,96 @@
 
 
 <div class="divider-bar">Your top picks</div>
-
 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-        @if (SignInManager.IsSignedIn(User))
-        {
-            @foreach (BrixProduct p in Model)
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <div class="carousel-inner">
+            @{ var i = 0; }
+            @foreach (var p in Model)
             {
-
-                <div class="carousel-item">
+                <div class="carousel-item @(i == 0 ? "active" : "")">
                     <img src="@p.ImgLink" alt="@p.Name">
                     <div class="product-action">
-                        <div class="price-text">@p.Price</div>
+                        <div class="price-text">$@p.Price.00</div>
                         <button class="addToCart-btn">Add to Cart</button>
                     </div>
                 </div>
+                i++;
             }
-        }
-        else
-            {
-                
-                {
-                <div class="carousel-item active">
-                    @* Change this image *@
-                    <img src="~/content/product-images/Baseplate.jpg" alt="Image 1">
-                    <div class="product-action">
-                        @* Change this price *@
-                        <div class="price-text">$199.99</div>
-                        <button class="addToCart-btn">Add to Cart</button>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="~/content/product-images/Helicopter.jpg" alt="Image 2">
-                    <div class="product-action">
-                        <div class="price-text">$199.99</div>
-                        <button class="addToCart-btn">Add to Cart</button>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="~/content/product-images/Typewriter.jpg" alt="Image 3">
-                    <div class="product-action">
-                        <div class="price-text">$199.99</div>
-                        <button class="addToCart-btn">Add to Cart</button>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="~/content/product-images/Ice cream truck.jpg" alt="Image 4">
-                    <div class="product-action">
-                        <div class="price-text">$199.99</div>
-                        <button class="addToCart-btn">Add to Cart</button>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="~/content/product-images/Up-Lego.jpg" alt="Image 5">
-                    <div class="product-action">
-                        <div class="price-text">$199.99</div>
-                        <button class="addToCart-btn">Add to Cart</button>
-                    </div>
-                </div>
-                        
-                }
-            }
-        }
-</div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
-    <br />
-    <br />
-    <div style="text-align: center;">
-        <button type="button" style="margin-bottom: 20px; display: inline-block; padding: 10px 100px; background-color: #01bf74; border: 1px solid black; border-radius: 10px;">
-            <a href="@Url.Action("ProductList", "Home")" style="text-decoration: none; color: black; font-weight: bold;">Full Product List</a>
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
         </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    }
+    else
+    {
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                @* Change this image *@
+                <img src="https://live.staticflickr.com/65535/53644387917_456bbed258_c.jpg" alt="Exotic Peacock">
+                <div class="product-action">
+                    @* Change this price *@
+                    <div class="price-text">$20.00</div>
+                    <button class="addToCart-btn">Add to Cart</button>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://live.staticflickr.com/65535/53645718975_7a10c1087c_c.jpg" alt="'UP' House">
+                <div class="product-action">
+                    <div class="price-text">$60.00</div>
+                    <button class="addToCart-btn">Add to Cart</button>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://live.staticflickr.com/65535/53645258916_39e0b2cf40_c.jpg" alt="Stitch">
+                <div class="product-action">
+                    <div class="price-text">$10.00</div>
+                    <button class="addToCart-btn">Add to Cart</button>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://live.staticflickr.com/65535/53645598614_b1331ff8d8_c.jpg" alt="Coca-Cola Vending Machine">
+                <div class="product-action">
+                    <div class="price-text">$8.00</div>
+                    <button class="addToCart-btn">Add to Cart</button>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://live.staticflickr.com/65535/53645258936_7243f54a71_c.jpg" alt="Talking Sorting Hat">
+                <div class="product-action">
+                    <div class="price-text">$100.00</div>
+                    <button class="addToCart-btn">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    }
         <br />
-    </div>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <form method="get">
-        <button type="submit" asp-controller="Admin" asp-action="ProductCrud">Admin</button>
-    </form>
-
-
-
-
-
-</div>
+                <br />
+                <div style="text-align: center;">
+                    <button type="button" style="margin-bottom: 20px; display: inline-block; padding: 10px 100px; background-color: #01bf74; border: 1px solid black; border-radius: 10px;">
+                        <a href="@Url.Action("ProductList", "Home")" style="text-decoration: none; color: black; font-weight: bold;">Full Product List</a>
+                    </button>
+                    <br />
+                </div>
+                <div>
+                    <button type="button"></button>
+                </div>
+       </div>         
 
 @section Scripts {
 
