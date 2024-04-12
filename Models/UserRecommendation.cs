@@ -6,10 +6,10 @@ namespace AuroraBricks.Models;
 public class UserRecommendation
 {
     [Required]
-    public int CustomerId { get; }
-    public string Recommendation1 { get; }
-    public string Recommendation2 { get; }
-    public string Recommendation3 { get; }
-    public string Recommendation4 { get; }
-    public string Recommendation5 { get; }
+    public int CustomerId { get; set; }
+    public string Product1 { get; set; }
+    public string Product2 { get; set; }
+    public string Product3 { get; set; }
+    public string Product4 { get; set; }
+    public string Product5 { get; set; }
 }
