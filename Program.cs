@@ -19,8 +19,8 @@ internal class Program
     public static async Task Main(string[] args)
     {
         // When we deploy, uncomment
-        //var identityConnectionString = Environment.GetEnvironmentVariable("ConnectionStrings:DefaultConnection");
-        //var generalConnectionString = Environment.GetEnvironmentVariable("ConnectionStrings:ABrixConnection");
+        var identityConnectionString = Environment.GetEnvironmentVariable("SQLCONNSTR_DefaultConnection");
+        var generalConnectionString = Environment.GetEnvironmentVariable("SQLCONNSTR_ABrixConnection");
         
         var builder = WebApplication.CreateBuilder(args);
         var configuration = builder.Configuration;
@@ -36,17 +36,17 @@ internal class Program
             .Build();
 
         //Add services to the container.
-        var identityConnectionString = config["ConnectionStrings:DefaultConnection"] ??
-                                       throw new InvalidOperationException("Connection string 'DefaultConnection' not found in user secrets.");
+        //var identityConnectionString = config["ConnectionStrings:DefaultConnection"] ??
+                                       //throw new InvalidOperationException("Connection string 'DefaultConnection' not found in user secrets.");
 
-        var generalConnectionString = config["ConnectionStrings:ABrixConnection"] ??
-                                      throw new InvalidOperationException("Connection string 'ABrixConnection' not found in user secrets.");
+        //var generalConnectionString = config["ConnectionStrings:ABrixConnection"] ??
+                                      //throw new InvalidOperationException("Connection string 'ABrixConnection' not found in user secrets.");
 
         
         builder.Services.AddAuthentication().AddGoogle(googleOptions =>
         {
-            googleOptions.ClientId = configuration["Google:ClientId"];
-            googleOptions.ClientSecret = configuration["Google:ClientSecret"];
+            googleOptions.ClientId = Environment.GetEnvironmentVariable("GOOGLE_PROVIDER_AUTHENTICATION_ID");
+            googleOptions.ClientSecret = Environment.GetEnvironmentVariable("GOOGLE_PROVIDER_AUTHENTICATION_SECRET");
             googleOptions.CallbackPath = "/Home/Index"; // Specify your custom callback path here
 
         });
@@ -83,6 +83,15 @@ internal class Program
         builder.Services.AddControllersWithViews();
 
         builder.Services.AddRazorPages();
+        builder.Services.Configure<CookiePolicyOptions>(options =>
+        {
+            // This lambda determines whether user consent for non-essential 
+            // cookies is needed for a given request.
+            options.CheckConsentNeeded = context => true;
+
+            options.MinimumSameSitePolicy = SameSiteMode.None;
+            options.ConsentCookieValue = "true";
+        });
         builder.Services.AddDistributedMemoryCache();
         builder.Services.AddSession();
         builder.Services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
@@ -105,12 +114,21 @@ internal class Program
 
         app.UseHttpsRedirection();
         app.UseStaticFiles();
-        app.UseSession();
 
         app.UseRouting();
 
+        app.Use(async (ctx, next) =>
+        {
+            ctx.Response.Headers.Add("Content-Security-Policy",
+            "default-src 'self'");
+            await next();
+        });
+
+
         app.UseAuthentication();
         app.UseAuthorization();
+
+        app.UseSession();
 
         app.MapControllerRoute(
             name: "default",
