@@ -117,7 +117,7 @@ public class HomeController : Controller
             {
                 CurrentPage = pageNum,
                 ItemsPerPage = pageSize,
-                TotalItems = _context.BrixProducts.Count()
+                TotalItems = _repo.Products.Count()
             }
         };
         return View(viewModel);
