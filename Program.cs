@@ -129,6 +129,7 @@ internal class Program
         app.UseAuthorization();
 
         app.UseSession();
+        app.UseCookiePolicy();
 
         app.MapControllerRoute(
             name: "default",
