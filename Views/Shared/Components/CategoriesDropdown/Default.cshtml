@@ -1,0 +1,17 @@
+@model IQueryable<string>
+
+<div class="container">
+    <form asp-controller="Home" asp-action="Index" method="get">
+        <div class="d-grid gap-2">
+            <a class="btn btn-secondary" asp-controller="Home" asp-action="Index" asp-route-projectType="" asp-route-pageNum="">Home</a>
+            <select class="select">
+                <option value="">Select Project Type</option>
+                @foreach (string p in Model ?? Enumerable.Empty<string>())
+                {
+                    <opion value="@p" @(p == ViewBag.SelectedProjectType ? "selected" : "")><a class="btn @(p == ViewBag.SelectedProjectType ? "btn-primary" : "btn-outline-secondary")" asp-controller="Home" asp-action="ProductList" asp-route-projectType="@p" asp-route-pageNum="1">@p</a></opion>
+                }
+            </select>
+        </div>
+        <input type="hidden" name="pageNum" value="1" />
+    </form>
+</div>
