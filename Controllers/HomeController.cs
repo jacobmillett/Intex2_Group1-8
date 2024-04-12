@@ -62,11 +62,11 @@ public class HomeController : Controller
         {
             var userRecommendations = await _repo.GetCustomerRecommendationByCustomerIdAsync(customer.CustomerId);
             
-            var product1 = await _repo.GetRecommendation1Async(userRecommendations.Recommendation1);
-            var product2 = await _repo.GetRecommendation2Async(userRecommendations.Recommendation2);
-            var product3 = await _repo.GetRecommendation3Async(userRecommendations.Recommendation3);
-            var product4 = await _repo.GetRecommendation4Async(userRecommendations.Recommendation4);
-            var product5 = await _repo.GetRecommendation5Async(userRecommendations.Recommendation5);
+            var product1 = await _repo.GetRecommendation1Async(userRecommendations.Product1);
+            var product2 = await _repo.GetRecommendation2Async(userRecommendations.Product2);
+            var product3 = await _repo.GetRecommendation3Async(userRecommendations.Product3);
+            var product4 = await _repo.GetRecommendation4Async(userRecommendations.Product4);
+            var product5 = await _repo.GetRecommendation5Async(userRecommendations.Product5);
             
             var productInfo = new List<BrixProduct> { product1, product2, product3, product4, product5 };
             
@@ -123,7 +123,19 @@ public class HomeController : Controller
         return View(viewModel);
     }
 
+    [HttpPost]
+    public IActionResult AddToCart(int productId, string returnUrl)
+    {
+        var cart = SessionCart.GetCart(HttpContext.RequestServices);
+        var product = _repo.Products.FirstOrDefault(p => p.ProductId == productId);
 
+        if (product != null)
+        {
+            cart.AddItem(product, 1);
+        }
+
+        return RedirectToAction("Cart", new { returnUrl });
+    }
 
 
     public IActionResult ProductDetail(int ProductId)
