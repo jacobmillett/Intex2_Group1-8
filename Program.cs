@@ -101,8 +101,18 @@ internal class Program
 
         app.UseRouting();
 
+        app.Use(async (ctx, next) =>
+        {
+            ctx.Response.Headers.Add("Content-Security-Policy",
+            "default-src 'self'");
+            await next();
+        });
+
+
         app.UseAuthentication();
         app.UseAuthorization();
+
+        app.UseSession();
 
         app.MapControllerRoute(
             name: "default",
