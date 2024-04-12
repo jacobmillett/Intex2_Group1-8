@@ -31,34 +31,49 @@ public class HomeController : Controller
     public IActionResult ProductList(int pageNum, string category, string primaryColor)
     {
         int pageSize = 5;
-        var query = _context.BrixProducts.AsQueryable()
-            .OrderBy(x => x.Name)
-            .Skip((pageNum - 1) * pageSize)
-            .Take(pageSize);
 
+        // Prepare the base query to be filtered
+        var baseQuery = _context.BrixProducts.AsQueryable();
+
+        // Apply filters
         if (!string.IsNullOrEmpty(category))
         {
-            query = query.Where(p => p.Category == category);
+            baseQuery = baseQuery.Where(p => p.Category == category);
         }
-
         if (!string.IsNullOrEmpty(primaryColor))
         {
-            query = query.Where(p => p.PrimaryColor == primaryColor);
+            baseQuery = baseQuery.Where(p => p.PrimaryColor == primaryColor);
         }
 
-        var products = query.OrderBy(p => p.ProductId).ToList();
+        // First, count all items for pagination (before paging the items)
+        var totalCount = baseQuery.Count();
 
+        // Retrieve the current page of filtered products
+        var products = baseQuery
+            .OrderBy(x => x.Name)
+            .Skip((pageNum - 1) * pageSize)
+            .Take(pageSize)
+            .ToList();
+
+        // Prepare categories and primary colors for dropdowns, ideally cached if called frequently
+        ViewBag.Categories = _context.BrixProducts.Select(p => p.Category).Distinct().ToList();
+        ViewBag.PrimaryColors = _context.BrixProducts.Select(p => p.PrimaryColor).Distinct().ToList();
+
+        // Pass current filter values back to the view to repopulate the form
         ViewBag.Category = category;
         ViewBag.PrimaryColor = primaryColor;
-        ViewBag.Categories = _context.BrixProducts.Select(p => p.Category).Distinct();
-        ViewBag.PrimaryColors = _context.BrixProducts.Select(p => p.PrimaryColor).Distinct();
+
+        // Prepare pagination data
+        ViewBag.TotalPages = (int)Math.Ceiling((double)totalCount / pageSize);
+        ViewBag.CurrentPage = pageNum;
 
         return View(products);
     }
 
 
 
-    public IActionResult ProductDetails(int ProductId)
+
+    public IActionResult ProductDetail(int ProductId)
     {
         var product = _context.BrixProducts.FirstOrDefault(p => p.ProductId == ProductId);
         if (product == null)
