@@ -62,9 +62,20 @@
 
     .container .pagination-container.left-margin {
         margin-left: 30px;
-        background-color: #01bf74;
-        width: auto; /* Or specify a width */
-        display: inline-block; /* Makes the div only as wide as its content */
+        background-color: grey;
+        width: auto;
+        display: inline-block; 
+    }
+
+    .filter-row {
+        display: flex; /* Enables flexbox layout */
+        justify-content: space-around; /* Distributes space evenly around items */
+        margin-bottom: 20px; /* Adds space below the row */
+        padding: 10px 0; /* Padding for better visual appearance */
+    }
+
+    select {
+        width: 150px; /* Ensures all dropdowns are the same width */
     }
 
 </style>
@@ -79,7 +90,7 @@
 <div>
 </div>
 
-<div class="container">
+@* <div class="container">
     <form method="get" action="@Url.Action("ProductList", "Home")">
         <label for="pageSize">Results per page:</label>
         <select name="pageSize" onchange="this.form.submit()">
@@ -90,7 +101,38 @@
         <input type="hidden" name="pageNum" value="@Model.PaginationInfo.CurrentPage" />
     </form>
    
+</div> *@
+
+
+
+
+<div class="container" style="justify-content: space-between;">
+    @using (Html.BeginForm("ProductList", "Home", FormMethod.Get))
+    {
+        <div class="filter-row">
+            <div>
+                <label for="category">Category:</label>
+                @Html.DropDownListFor(m => m.SelectedCategory, Model.Categories, "Select Category", new { onchange = "this.form.submit();", @class = "form-control" })
+            </div>
+            <div>
+                <label for="primaryColor">Primary Color:</label>
+                @Html.DropDownListFor(m => m.SelectedPrimaryColor, Model.PrimaryColors, "Select Color", new { onchange = "this.form.submit();", @class = "form-control" })
+            </div>
+            <div>
+                <label for="pageSize">Results per page:</label>
+                <select name="pageSize" onchange="this.form.submit()" class="form-control">
+                    <option value="5" current>5</option>
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                </select>
+                <input type="hidden" name="pageNum" value="@Model.PaginationInfo.CurrentPage" />
+            </div>
+        </div>
+    }
 </div>
+
+
+
 
 
 
@@ -98,7 +140,7 @@
     <div class="pb-3">
         <!-- Start a new row for your products -->
         <div class="row">
-            @foreach (BrixProduct p in Model.Product)
+            @foreach (BrixProduct p in Model.Products)
             {
                 <!-- Each product takes up 6 columns in medium to large screens, making it 2 products per row -->
                 <div class="col-md-6 mb-3">
