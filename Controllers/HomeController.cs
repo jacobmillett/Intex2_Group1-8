@@ -272,7 +272,7 @@ public class HomeController : Controller
 
                 var input = new List<float>
                     {
-                        
+                        details.Order.CustomerId,
                         (float)details.Order.Time,
 				        (float)(details.Order.Amount),
 
@@ -300,11 +300,7 @@ public class HomeController : Controller
             //             order.CountryOfTransaction == "China" ? 1 : 0,
 
 				        //use countryoftransaction if shipping address is null
-				        (details.Order.ShippingAddress ?? details.Order.CountryOfTransaction) == "India" ? 1 : 0,
-                        (details.Order.ShippingAddress ?? details.Order.CountryOfTransaction) == "Russia" ? 1 : 0,
-                        (details.Order.ShippingAddress ?? details.Order.CountryOfTransaction) == "USA" ? 1 : 0,
-                        (details.Order.ShippingAddress ?? details.Order.CountryOfTransaction) == "United Kingdom" ? 1 : 0,
-                        (details.Order.ShippingAddress ?? details.Order.CountryOfTransaction) == "China" ? 1 : 0,
+                        (details.Order.ShippingAddress ?? details.Order.CountryOfTransaction) == "United Kingdom" ? 1 : 0
                         //
                         // order.Bank == "HSBC" ? 1 : 0,
                         // order.Bank == "Halifax" ? 1 : 0,
