@@ -1,0 +1,26 @@
+
+@{
+    ViewData["Title"] = "Confirm Order";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model BrixOrder
+
+<div class="centereddiv">
+    
+    <h2>Thank you for placing an order!</h2>
+
+    @if (Model.FlagFraud == "Fraud"){
+        <p>Your order is in processing. You will be notified when it ships.</p>
+    }
+    else
+    {
+        <p>Order #@Model.TransactionId</p>
+        <p>Your order will be shipped to you soon.</p>
+            
+    }
+        
+</div>
+
+@section Scripts {
+
+}

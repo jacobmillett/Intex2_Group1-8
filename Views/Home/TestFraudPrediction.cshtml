@@ -1,0 +1,14 @@
+@{
+    ViewData["Title"] = "TestFraudPrediction";
+}
+
+<h1>Test Fraud Prediction</h1>
+
+@if ((int)ViewBag.IsFraudulent == 1)
+{
+    <p>The prediction indicates fraud for the provided values.</p>
+}
+else
+{
+    <p>The prediction does not indicate fraud for the provided values.</p>
+}

@@ -7,7 +7,8 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<br/>
+<br/>
 <div class = centereddiv>
     <h1>Customer Profile</h1>  
 </div>
@@ -15,8 +16,10 @@
 <br/>
 @if (Model != null)
 {
-    <div class="centereddiv border formpadding">
-        <table>
+ 
+<div class="centereddiv formpadding">
+    <div class="table-border formpadding">
+        <table class="paddingtopbottom">
             <tr>
                 <td><h3>Name:</h3></td>
                 <td><h3>@Model.FirstName @Model.LastName</h3></td>
@@ -43,22 +46,29 @@
             </tr>
             <tr>
                 <td>
-                    <a class="btn btn-toolbar" asp-controller="Home" asp-action="CustomerSignUp" asp-route-id="@Model.CustomerId">Edit</a>
+                    <a class="btn btn-darkblue" asp-controller="Home" asp-action="EditCustomerProfile" asp-route-id="@Model.CustomerId">Edit Profile</a>
                 </td>
             </tr>
-        </table>
-        
- 
-        
+        </table> 
     </div>
+</div>
+    
 }
 else
 {
     <div><h3>No customer information found for the logged-in user.</h3></div>
 }
 
-
-
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/><br/><br/><br/><br/><br/>
 
 
 

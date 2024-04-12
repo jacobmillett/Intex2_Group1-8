@@ -25,7 +25,7 @@ public partial class AbrixContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlite("AbrixConnection");
+        => optionsBuilder.UseSqlite("Data Source = Abrix.db");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -71,6 +71,7 @@ public partial class AbrixContext : DbContext
             entity.Property(e => e.DayOfWeek).HasColumnName("day_of_week");
             entity.Property(e => e.EntryMode).HasColumnName("entry_mode");
             entity.Property(e => e.Fraud).HasColumnName("fraud");
+            entity.Property(e => e.FlagFraud).HasColumnName("FlagFraud");
             entity.Property(e => e.ShippingAddress).HasColumnName("shipping_address");
             entity.Property(e => e.Time).HasColumnName("time");
             entity.Property(e => e.TypeOfCard).HasColumnName("type_of_card");

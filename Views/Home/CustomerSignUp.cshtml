@@ -14,7 +14,7 @@
     <div class="row formpadding">
         <div class="centereddiv formpadding">
             
-            <form method="post" class="row">
+            <form method="post" class="row" action="@Url.Action("CustomerSignUp", "Home")">
                 <input type = "hidden" asp-for="CustomerId" />
                 <h2>Register Below</h2>
                 <hr/>
@@ -60,7 +60,7 @@
                 <div class="formpadding">
                     <div class="formpadding">
                         <div class="formpadding">
-                            <button class="btn-darkblue centereddiv formpadding">Register</button>
+                            <button type="submit" class="btn-darkblue centereddiv formpadding">Register</button>
                         </div>
                     </div>
                 </div>

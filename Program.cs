@@ -1,3 +1,5 @@
+using System.Collections.Immutable;
+using System.Formats.Asn1;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using AuroraBricks.Data;
@@ -5,6 +7,12 @@ using AuroraBricks.Areas.Identity.Data;
 using AuroraBricks.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Options;
+using System.Linq;
+using Microsoft.ML;
+using Microsoft.ML.Data;
+using Microsoft.ML.Transforms.Onnx;
+
+
 
 internal class Program
 {
@@ -17,7 +25,7 @@ internal class Program
         var builder = WebApplication.CreateBuilder(args);
         var configuration = builder.Configuration;
         var env = builder.Environment;
-        
+            
         // Load user secrets
         var config = new ConfigurationBuilder()
             .SetBasePath(env.ContentRootPath)
@@ -34,7 +42,7 @@ internal class Program
         var generalConnectionString = config["ConnectionStrings:ABrixConnection"] ??
                                       throw new InvalidOperationException("Connection string 'ABrixConnection' not found in user secrets.");
 
-
+        
         builder.Services.AddAuthentication().AddGoogle(googleOptions =>
         {
             googleOptions.ClientId = configuration["Google:ClientId"];
@@ -49,7 +57,7 @@ internal class Program
                 policy.RequireRole("Admin");
             });
         });
-
+        
         builder.Services.AddDbContext<AuroraBricksIdentityDbContext>(options =>
             options.UseSqlite(identityConnectionString));
 
@@ -60,7 +68,7 @@ internal class Program
         builder.Services.AddScoped<IBrixRepository, EfBrixRepository>();
 
         builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
+        builder.Services.AddSingleton<MLContext>();
         builder.Services.AddHsts(options =>
         {
             options.Preload = true;
@@ -68,8 +76,7 @@ internal class Program
             options.MaxAge = TimeSpan.FromDays(60);
             options.ExcludedHosts.Add("example.com");
         });
-
-
+        
         builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
             .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<AuroraBricksIdentityDbContext>();
@@ -98,6 +105,7 @@ internal class Program
 
         app.UseHttpsRedirection();
         app.UseStaticFiles();
+        app.UseSession();
 
         app.UseRouting();
 
@@ -108,7 +116,9 @@ internal class Program
             name: "default",
             pattern: "{controller=Home}/{action=Index}/{id?}");
         app.MapRazorPages();
-
+        
+            
+        
         using (var scope = app.Services.CreateScope())
         {
             var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();

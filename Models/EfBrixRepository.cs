@@ -28,10 +28,32 @@ public class EfBrixRepository : IBrixRepository
         _context.Add(product);
         _context.SaveChanges();
     }
+    public void AddOrder(BrixOrder order)
+    {
+        _context.Add(order);
+        _context.SaveChanges();
+    }
+    public void AddLineItem(BrixLineItem lineItem)
+    {
+        _context.Add(lineItem);
+        _context.SaveChanges();
+    }
 
     public void EditProduct(BrixProduct product)
     {
         _context.BrixProducts.Update(product);
+        _context.SaveChanges();
+    }
+
+    public void EditOrder(BrixOrder order)
+    {
+        _context.BrixOrders.Update(order);
+        _context.SaveChanges();
+    }
+
+    public void RemoveOrder(BrixOrder order)
+    {
+        _context.BrixOrders.Remove(order);
         _context.SaveChanges();
     }
 
@@ -62,9 +84,17 @@ public class EfBrixRepository : IBrixRepository
         
         return _context.BrixProducts.OrderByDescending(x => x.ProductId).FirstOrDefault();
     }
+    
+    public BrixOrder GetLastOrder()
+    {
+        
+        return _context.BrixOrders.OrderByDescending(x => x.TransactionId).FirstOrDefault();
+    }
+    
     public async Task<BrixCustomer> GetBrixCustomerByEmailAsync(string email)
     {
         return await _context.BrixCustomers.FirstOrDefaultAsync(c => c.Email == email);
     }
+
 }
 
