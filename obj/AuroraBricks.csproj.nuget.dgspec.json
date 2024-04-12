@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/stewyman/Desktop/ISWinter2024/Intex2_Group1-8/AuroraBricks.csproj": {}
+    "/Users/jacob/RiderProjects/AuroraBricks/AuroraBricks.csproj": {}
   },
   "projects": {
-    "/Users/stewyman/Desktop/ISWinter2024/Intex2_Group1-8/AuroraBricks.csproj": {
+    "/Users/jacob/RiderProjects/AuroraBricks/AuroraBricks.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/stewyman/Desktop/ISWinter2024/Intex2_Group1-8/AuroraBricks.csproj",
+        "projectUniqueName": "/Users/jacob/RiderProjects/AuroraBricks/AuroraBricks.csproj",
         "projectName": "AuroraBricks",
-        "projectPath": "/Users/stewyman/Desktop/ISWinter2024/Intex2_Group1-8/AuroraBricks.csproj",
-        "packagesPath": "/Users/stewyman/.nuget/packages/",
-        "outputPath": "/Users/stewyman/Desktop/ISWinter2024/Intex2_Group1-8/obj/",
+        "projectPath": "/Users/jacob/RiderProjects/AuroraBricks/AuroraBricks.csproj",
+        "packagesPath": "/Users/jacob/.nuget/packages/",
+        "outputPath": "/Users/jacob/RiderProjects/AuroraBricks/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/stewyman/.nuget/NuGet/NuGet.Config"
+          "/Users/jacob/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -118,7 +118,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.203/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/Users/jacob/.dotnet/sdk/8.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
