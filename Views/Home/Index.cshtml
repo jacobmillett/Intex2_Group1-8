@@ -98,18 +98,31 @@
             <span class="visually-hidden">Next</span>
         </button>
     }
+    <br />
+    <br />
+    <div style="text-align: center;">
+        <button type="button" style="margin-bottom: 20px; display: inline-block; padding: 10px 100px; background-color: #01bf74; border: 1px solid black; border-radius: 10px;">
+            <a href="@Url.Action("ProductList", "Home")" style="text-decoration: none; color: black; font-weight: bold;">Full Product List</a>
+        </button>
         <br />
-                <br />
-                <div style="text-align: center;">
-                    <button type="button" style="margin-bottom: 20px; display: inline-block; padding: 10px 100px; background-color: #01bf74; border: 1px solid black; border-radius: 10px;">
-                        <a href="@Url.Action("ProductList", "Home")" style="text-decoration: none; color: black; font-weight: bold;">Full Product List</a>
-                    </button>
-                    <br />
-                </div>
-                <div>
-                    <button type="button"></button>
-                </div>
-       </div>         
+    </div>
+    <div>
+                    
+    </div>
+</div>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<form method="get">
+    <button type="Submit" asp-controller="Admin" asp-action="ProductCrud">Admin</button>
+</form>
+
 
 @section Scripts {
 
