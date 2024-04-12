@@ -6,46 +6,56 @@
 }
 @model List<BrixProduct>
 
-<table class="table table-bordered">
-    <thead class="fw-bold">
-    <tr>
-        <td>Name</td>
-        <td>Year</td>
-        <td>Number of Parts</td>
-        <td>Price</td>
-        <td>Image URL</td>
-        <td>Primary Color</td>
-        <td>Secondary Color</td>
-        <td>Description</td>
-        <td>Category</td>
-    </tr>
-    </thead>
-
-    @foreach (var x in Model)
-    {
-        <tbody>
+<br/>
+<br/>
+<form class="paddingleft" method="get">
+    <button type="submit" class="btn-darkblue col-3"asp-controller="Admin" asp-action="AddNewProduct" >Add New Product</button>
+</form>
+<br/>
+<br/>
+<div class="table-container centereddiv">
+    <table class="table table-bordered table-striped table-border">
+        <thead class="fw-bold">
         <tr>
-            <td>@x.Name</td>
-            <td>@x.Year</td>
-            <td>@x.NumParts</td>
-            <td>@x.Price</td>
-            <td>@x.ImgLink</td>
-            <td>@x.PrimaryColor</td>
-            <td>@x.SecondaryColor</td>
-            <td>@x.Description</td>
-            <td>@x.Category</td>
-            
-            <td><a class="btn btn-toolbar" asp-controller="Admin" asp-action="Edit" asp-route-id="@x.ProductId">Edit</a></td> 
-            <td><a class="btn btn-danger" asp-controller="Admin" asp-action="DeleteProduct" asp-route-id ="@x.ProductId">Delete</a></td> 
-    
+            <td>Name</td>
+            <td>Year</td>
+            <td>Number of Parts</td>
+            <td>Price</td>
+            <td>Image URL</td>
+            <td>Primary Color</td>
+            <td>Secondary Color</td>
+            <td>Description</td>
+            <td>Category</td>
         </tr>
-        </tbody>
-    }
+        </thead>
+    
+        @foreach (var x in Model)
+        {
+            <tbody>
+            <tr>
+                <td>@x.Name</td>
+                <td>@x.Year</td>
+                <td>@x.NumParts</td>
+                <td>@x.Price</td>
+                <td>@x.ImgLink</td>
+                <td>@x.PrimaryColor</td>
+                <td>@x.SecondaryColor</td>
+                <td class="description-cell">@x.Description</td>
+                <td>@x.Category</td>
+                
+                <td><a class="btn btn-darkblue" asp-controller="Admin" asp-action="Edit" asp-route-id="@x.ProductId">Edit</a><td/> 
+                <td><a class="btn btn-danger" asp-controller="Admin" asp-action="DeleteProduct" asp-route-id ="@x.ProductId">Delete</a><td/> 
+        
+            </tr>
+            </tbody>
+        }
+    
+    
+    
+    
+    </table>
+</div>
 
-
-
-
-</table>
 
 @section Scripts {
 

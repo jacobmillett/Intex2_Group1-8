@@ -9,23 +9,30 @@ using System.Drawing;
 using Microsoft.CodeAnalysis;
 using Microsoft.Extensions.Hosting.Internal;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.ML.OnnxRuntime.Tensors;
+using Microsoft.ML.OnnxRuntime;
+using System.Numerics.Tensors;
+using Microsoft.ML;
+using Microsoft.ML.Data;
 
 namespace AuroraBricks.Controllers;
 
 [Authorize(Policy = "AdminPolicy")]
 public class AdminController : Controller
 {
+        
         private readonly UserManager<IdentityUser> _userManager;
         private IBrixRepository _repo;
         // private readonly string _onnxModelPath;
         
            
-        public AdminController(IBrixRepository temp, UserManager<IdentityUser> userManager)
+        public AdminController(IBrixRepository temp, UserManager<IdentityUser> userManager, MLContext mlContext)
         {
                 _repo = temp;
                 _userManager = userManager;
                 // _onnxModelPath = System.IO.Path.Combine(HostEnvironment.ContentRootPath, "fraudModel.onnx");
-                // _session = new InterfaceSession(_onnxModelPath);
+                // var _session = new InterfaceSession(_onnxModelPath);
+                // _mlContext = mlContext;
         }
         
         [HttpGet]
@@ -76,19 +83,67 @@ public class AdminController : Controller
                         .OrderBy(x => x.Name).ToList();
                 return View(products);
         }
-        
-        
+
+
 
         [HttpGet]
         public IActionResult OrderReview()
         {
                 var orders = _repo.Orders
                         .OrderByDescending(x => x.Date)
-                        .ThenByDescending(x=>x.Time)
+                        .ThenByDescending(x => x.Time)
                         .ToList();
                 return View(orders);
+        }
 
-        // var predictions = new List<OrderPrediction>(); //This is the ViewModel for the view
+
+
+
+        
+        
+        //
+        // public IActionResult Predict(int time, int amount, int country)
+        // {
+        //         // Load the trained pipeline
+        //         var pipeline = GetPredictedPipeline(_mlContext);
+        //
+        //         // Create a new OnnxInput object with the input data
+        //         var input = new OnnxInput { time = time, amount = amount, contryoftransactionUnitedKingdom = country };
+        //
+        //         // Use the trained pipeline to make predictions
+        //         var prediction = pipeline.Transform(_mlContext.Data.LoadFromEnumerable(new[] { input }));
+        //
+        //         // Extract the predicted fraud values
+        //         var predictedFraud = prediction.GetColumn<float[]>(nameof(OnnxOutput.PredictedFraud)).First();
+        //
+        //         // Do something with the predicted fraud values
+        //         return View();
+        // }
+        // static ITransformer GetPredictedPipeline(MLContext mlContext)
+        // {
+        //         var inputColumns = new string []
+        //         {
+        //                 "time", "amount", "country_of_transaction_United Kingdom"
+        //         };
+        //
+        //         var outputColumns = new string [] { "Predicted_Fraud" };  
+        //         
+        //         var onnxPredictionPipeline =
+        //                 mlContext.Transforms.ApplyOnnxModel(outputColumnNames: outputColumns, inputColumnNames: inputColumns, ONNX_MODEL_PATH);
+        //         var emptyDv = mlContext.Data.LoadFromEnumerable(new OnnxInput[] {});
+        //
+        //         return onnxPredictionPipeline.Fit(emptyDv);
+        // }
+
+                
+                
+                
+                
+                
+                
+                
+                
+        // var predictions = new List<OnnxInput>(); //This is the ViewModel for the view
         //
         // var class_type_dict = new Dictionary<int, string>
         //         {
@@ -113,7 +168,7 @@ public class AdminController : Controller
         //         daysSinceJan1_22,
         //
         //         //Fill in here with dummy code data
-        //
+        //         
         //
         //         //Use CountryOfTransaction if ShippingAddress is null
         //         (order.ShippingAddress ?? order.CountryOfTransaction) == "India" ? 1 : 0,
@@ -139,15 +194,15 @@ public class AdminController : Controller
         //         predictionResult = prediction != null && prediction.Length > 0 ? class_type_dict.GetValueOrDefault((int)prediction[0], "Unknown") : "Error in prediction";
         //     }
         //
-        //     predictions.Add(new OrderPrediction { Orders = order, Prediction = predictionResult });
+        //     predictions.Add(new OnnxInput { Orders = order, Prediction = predictionResult });
         // }
         //
         // return View(predictions);
-
-        }
-        
-
-
+        //
+        // }
+        //
+        //
+        //
         [HttpGet]
         public IActionResult UserCrud()
         {
@@ -157,7 +212,7 @@ public class AdminController : Controller
                         .ToList();
                 return View(customers);
         }
-
+        
 
 
         [HttpGet]
@@ -221,5 +276,9 @@ public class AdminController : Controller
                  _repo.RemoveProduct(product);
                  return RedirectToAction("ProductCrud");
          }
-                 
+         
+
+
+         
+
  }

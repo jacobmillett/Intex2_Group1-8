@@ -32,4 +32,6 @@ public partial class BrixOrder
     public string? TypeOfCard { get; set; }
 
     public int? Fraud { get; set; }
+    
+    public string? FlagFraud { get; set; }
 }

@@ -78,13 +78,25 @@
               "target": "Package",
               "version": "[8.0.4, )"
             },
+            "Microsoft.ML": {
+              "target": "Package",
+              "version": "[3.0.1, )"
+            },
             "Microsoft.ML.OnnxRuntime": {
               "target": "Package",
               "version": "[1.17.3, )"
             },
+            "Microsoft.ML.OnnxTransformer": {
+              "target": "Package",
+              "version": "[3.0.1, )"
+            },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[8.0.2, )"
+            },
+            "System.Numerics.Tensors": {
+              "target": "Package",
+              "version": "[8.0.0, )"
             }
           },
           "imports": [

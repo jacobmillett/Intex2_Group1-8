@@ -1,0 +1,69 @@
+@model AuroraBricks.ViewModels.CartViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+    
+    
+<div class="centereddiv">
+     <h2>Check out now</h2>
+</div>
+
+
+
+<div class="centereddiv">
+      <p>Please fill out the orders details:</p>
+</div>
+
+
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+
+<form asp-action="Checkout" method="post" class="formpadding">
+    <input type="hidden" asp-for="Order.TransactionId"/>
+    <input type="hidden" asp-for="Order.CustomerId" value="1"/>
+    <input type="hidden" asp-for="Order.Date" value="@DateTime.Now.ToString("MM/dd/yyyy")"/>
+    <input type="hidden" asp-for="Order.DayOfWeek" value="@DateTime.Now.ToString("ddd")"/>
+    <input type="hidden" asp-for="Order.Time" value="@DateTime.Now.ToString("HH")"/>
+    <input type="hidden" asp-for="Order.EntryMode" value="CVC"/>
+    <input type="hidden" asp-for="Order.TypeOfTransaction" value="Online"/>
+
+    <h3>Shipping</h3>
+
+    <div class="form-group">
+        <label>Country:</label>
+        <input asp-for="Order.ShippingAddress" class="form-control"/>
+    </div>
+    <h3>Payment Information</h3>
+    <div class="form-group">
+        <label asp-for="Order.Bank">Country of Transaction:</label>
+        <select asp-for="Order.CountryOfTransaction" class="form-control">
+            <option>USA</option>
+            <option>China</option>
+            <option>Russia</option>
+            <option>United Kingdom</option>
+            <option>India</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="Order.Bank">Bank:</label>
+        <input asp-for="Order.Bank" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label asp-for="Order.Bank">Card Type:</label>
+        <input asp-for="Order.TypeOfCard" class="form-control"/>
+    </div>
+
+    <br/>
+    <div class="text-center">
+        <button class="btn-darkblue" type="submit">Complete Order</button>
+    </div>
+</form>
+
+
+@section Scripts {
+
+}
