@@ -60,23 +60,53 @@ public class HomeController : Controller
 
         if (customer != null)
         {
-            var userRecommendations = await _repo.GetCustomerRecommendationByCustomerIdAsync(customer.CustomerId);
-            
-            var product1 = await _repo.GetRecommendation1Async(userRecommendations.Recommendation1);
-            var product2 = await _repo.GetRecommendation2Async(userRecommendations.Recommendation2);
-            var product3 = await _repo.GetRecommendation3Async(userRecommendations.Recommendation3);
-            var product4 = await _repo.GetRecommendation4Async(userRecommendations.Recommendation4);
-            var product5 = await _repo.GetRecommendation5Async(userRecommendations.Recommendation5);
-            
-            var productInfo = new List<BrixProduct> { product1, product2, product3, product4, product5 };
-            
+            var userRecommendations = _repo.UserRecommendations
+                .Where(x => x.CustomerId == 1)
+                .FirstOrDefault();
+        if (userRecommendations.CustomerId == 1)
+        {
+        
+            var productInfo = new List<BrixProduct>();
+
+            var product1 = _repo.Products.FirstOrDefault(x => x.Name == userRecommendations.Product1);
+            if (product1 != null)
+            {
+                productInfo.Add(product1);
+            }
+            var product2 = _repo.Products.FirstOrDefault(x => x.Name == userRecommendations.Product2);
+            if (product2 != null)
+            {
+                productInfo.Add(product2);
+            }
+            var product3 = _repo.Products.FirstOrDefault(x => x.Name == userRecommendations.Product3);
+            if (product3 != null)
+            {
+                productInfo.Add(product3);
+            }
+            var product4 = _repo.Products.FirstOrDefault(x => x.Name == userRecommendations.Product4);
+            if (product4 != null)
+            {
+                productInfo.Add(product4);
+            }
+            var product5 = _repo.Products.FirstOrDefault(x => x.Name == userRecommendations.Product5);
+            if (product5 != null)
+            {
+                productInfo.Add(product5);
+            }
+        
             return View(productInfo);
+        }
+        else
+        {
+                return View();
+             }
         }
         else
         {
             return View();
         }
     }
+
     
     [HttpGet]
     public IActionResult CustomerSignUp()
@@ -117,7 +147,7 @@ public class HomeController : Controller
             {
                 CurrentPage = pageNum,
                 ItemsPerPage = pageSize,
-                TotalItems = _context.BrixProducts.Count()
+                TotalItems = _repo.Products.Count()
             }
         };
         return View(viewModel);
@@ -245,7 +275,7 @@ public class HomeController : Controller
                     { 1, "Fraud" }
                 };
 
-                details.Order.Amount = (double)cart.ComputeTotalValue();
+                details.Order.Amount = (float)cart.ComputeTotalValue();
 
 
                 var input = new List<float>
